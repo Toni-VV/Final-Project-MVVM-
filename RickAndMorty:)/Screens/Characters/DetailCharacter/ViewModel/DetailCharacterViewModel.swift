@@ -1,0 +1,49 @@
+import Foundation
+
+protocol DetailCharacterViewModelProtocol {
+    var isFavorite: Box<Bool> { get }
+    var title: String { get }
+    var description: String { get }
+    var episodes: [String] { get }
+    var characterImageData: Data { get }
+    
+    init(character: Character)
+    func favoriteButtonPressed()
+}
+
+class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
+
+    private let character: Character
+    
+    var isFavorite: Box<Bool>
+    
+    var title: String {
+        character.name
+    }
+    var description: String {
+        character.description
+    }
+    
+    var episodes: [String] {
+        character.episode
+    }
+    
+    var characterImageData: Data {
+        let url = URL(string: character.image)
+        guard
+            let data = ImageManager.shared.fetchImage(url: url!)
+        else { return Data() }
+        return data
+    }
+
+    required init(character: Character) {
+        self.character = character
+        self.isFavorite = Box(value: DataManager.shared.getFavoriteStatus(for: character.name))
+    }
+    
+    func favoriteButtonPressed() {
+        isFavorite.value.toggle()
+        DataManager.shared.setFavoriteStatus(for: character.name,
+                                             with: isFavorite.value)
+    }
+}
