@@ -39,6 +39,7 @@ class MainCell: UITableViewCell {
     private func setupView() {
         contentView.addSubview(mainImage)
         mainImage.addSubview(titleLabel)
+        contentView.backgroundColor = UIColor.backgroundColor()
         setupConstraints()
     }
     

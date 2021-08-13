@@ -3,7 +3,16 @@ import UIKit
 class DetailCharacterVC: UIViewController {
     
     //MARK: - Properties
-    var episodes: [String] = []
+    
+    var viewModel: DetailCharacterViewModelProtocol! {
+        didSet {
+            characterImage.image = UIImage(data: viewModel.characterImageData)
+            descriptionLabel.text = viewModel.description
+            episodes = viewModel.episodes
+        }
+    }
+    
+   private var episodes: [String] = []
     
     private let favoriteButton: UIButton = {
         let button = UIButton()
@@ -13,8 +22,7 @@ class DetailCharacterVC: UIViewController {
         button.contentMode = .scaleToFill
         return button
     }()
-    let descriptionLabel = UILabel(color: .white, font: 25)
-    
+    private let descriptionLabel = UILabel(color: .white, font: 25)
     private let characterImage = UIImageView(contentMode: .scaleAspectFill,
                                           cornerRadius: 20)
     private let episodeButton = UIButton(text: "Episodes",
@@ -24,14 +32,6 @@ class DetailCharacterVC: UIViewController {
                                          font: 25,
                                          borderWidth: 1,
                                          cornerRadius: 20)
- 
-    var viewModel: DetailCharacterViewModelProtocol! {
-        didSet {
-            characterImage.image = UIImage(data: viewModel.characterImageData)
-            descriptionLabel.text = viewModel.description
-            episodes = viewModel.episodes
-        }
-    }
     
     //MARK: - Life Cycle
     
@@ -48,7 +48,8 @@ class DetailCharacterVC: UIViewController {
     
     private func setupView() {
         view.backgroundColor = UIColor.backgroundColor()
-        [characterImage,favoriteButton,descriptionLabel,episodeButton].forEach(view.addSubview(_:))
+        [characterImage,favoriteButton,
+         descriptionLabel,episodeButton].forEach(view.addSubview(_:))
         setupConstraints()
     }
     

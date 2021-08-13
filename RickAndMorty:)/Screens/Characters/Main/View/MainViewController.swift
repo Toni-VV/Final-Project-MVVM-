@@ -4,6 +4,8 @@ class MainViewController: UIViewController {
     
     //MARK: - Properties
     
+  private var viewModel: MainViewModelProtocol = MainViewModel()
+    
     private let tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = UIColor.backgroundColor()
@@ -11,8 +13,6 @@ class MainViewController: UIViewController {
                        forCellReuseIdentifier: MainCell.identifier)
         return table
     }()
-   
-    var viewModel: MainViewModelProtocol = MainViewModel()
 
     //MARK: - Life Cycle
     
@@ -40,21 +40,22 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
        return viewModel.numberOfRows
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainCell.identifier,
                                                  for: indexPath) as! MainCell
         cell.viewModel = viewModel.viewModelCell(index: indexPath)
-        cell.backgroundColor = UIColor.backgroundColor()
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-//        tableView.deselectRow(at: indexPath, animated: false)
         switch indexPath.row {
         case 0:
             let vc = CharacterViewController()

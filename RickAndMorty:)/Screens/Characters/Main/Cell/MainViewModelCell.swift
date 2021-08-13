@@ -13,7 +13,7 @@ protocol MainViewModelCellProtocol {
 
 class MainViewModelCell: MainViewModelCellProtocol {
    
-    let cell: Main
+   private let cell: Main
     
     var title: String {
         cell.titleLabel

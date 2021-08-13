@@ -6,8 +6,9 @@ protocol CharacterViewModelProtocol {
     var filteredNumberOfRows: Int { get }
     var rickAndMorty: RickyAndMorty? { get }
     var filterCharachter: [Character] { get set }
+    var urlString: String { get }
+    
     func fetchData(urlString: String, completion: @escaping () -> Void)
-//    func fetchData2(urlString: String, completion: @escaping () -> Void)
     func viewModelCell(index: IndexPath) -> CharacterViewModelCellProtocol
     func filterViewModelCell(index: IndexPath) -> CharacterViewModelCellProtocol
     func detailViewModel(index: IndexPath) -> DetailCharacterViewModel
@@ -15,12 +16,15 @@ protocol CharacterViewModelProtocol {
 }
 
 class CharacterViewModel: CharacterViewModelProtocol {
-    
+
     var networkDataFetcher: NetworkDataFetcherProtocol
     var characters: [Character] = []
     var filterCharachter: [Character] = []
     var rickAndMorty: RickyAndMorty?
     
+    var urlString: String {
+        "https://rickandmortyapi.com/api/character"
+    }
     var numberOfRows: Int {
         characters.count
     }
@@ -47,23 +51,7 @@ class CharacterViewModel: CharacterViewModelProtocol {
             }
         }
     }
-    
-//        func fetchData2(urlString: String, completion: @escaping () -> Void) {
-//            networkDataFetcher.fetchCharacter(urlString: urlString) { (result) in
-//                switch result {
-//                case .success(let rickAndMorty):
-//                    self.rickAndMorty = rickAndMorty
-//                    let result = rickAndMorty.results
-//                    DispatchQueue.main.async {
-//                        self.characters.append(contentsOf: result) // этот метод добавляет в конец массива
-//                        completion()
-//                    }
-//                case .failure(let error):
-//                print("Network fetch2 error", error.localizedDescription)
-//                }
-//            }
-//        }
-    
+
     func viewModelCell(index: IndexPath) -> CharacterViewModelCellProtocol {
         let characterCell = characters[index.row]
         return CharacterViewModelCell(character: characterCell)
