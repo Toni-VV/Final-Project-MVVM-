@@ -87,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4783E1E426C814E800A418D6 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				4783E17126C7BB4A00A418D6 /* ErrorViewController.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		47D1623E26C16E7F00D82105 = {
 			isa = PBXGroup;
 			children = (
@@ -180,7 +188,7 @@
 				47D1629426C1C70400D82105 /* Character */,
 				47D162D326C2F93900D82105 /* Filter */,
 				47D162BD26C2D32700D82105 /* DetailCharacter */,
-				4783E17126C7BB4A00A418D6 /* ErrorViewController.swift */,
+				4783E1E426C814E800A418D6 /* Error */,
 			);
 			path = Screens;
 			sourceTree = "<group>";

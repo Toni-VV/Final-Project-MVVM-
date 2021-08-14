@@ -1,7 +1,5 @@
 import UIKit
 
-
-
 final class MainCell: UITableViewCell {
     
     //MARK: - Properties
@@ -63,11 +61,18 @@ final class MainCell: UITableViewCell {
     }
     
     private func applyFilter(intensity: Float, image: String) -> UIImage {
-        let beginImage = CIImage(image: UIImage(named: image)!)
-        let filter = CIFilter(name: "CIVignetteEffect")
-        filter?.setValue(beginImage, forKey: kCIInputImageKey)
-        filter?.setValue(0.4, forKey: kCIInputIntensityKey)
-        let newImage = UIImage(ciImage: (filter?.outputImage)!)
+        let filter = makeEffectFilter(intensity: intensity, image: image)
+        let newImage = UIImage(ciImage: (filter?.outputImage) ?? CIImage())
         return newImage
+    }
+    
+    private func makeEffectFilter(intensity: Float, image: String?) -> CIFilter? {
+        guard
+            let name = image, let startImage = CIImage(image: UIImage(named: name) ?? UIImage())
+        else { return nil }
+        let filter = CIFilter(name: "CIVignetteEffect")
+        filter?.setValue(startImage, forKey: kCIInputImageKey)
+        filter?.setValue(intensity, forKey: kCIInputIntensityKey)
+        return filter
     }
 }

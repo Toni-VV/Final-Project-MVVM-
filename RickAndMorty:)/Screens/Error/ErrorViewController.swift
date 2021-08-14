@@ -9,15 +9,13 @@ import UIKit
 
 class ErrorVieController: UIViewController {
     
-    
     private let image = UIImageView(image: UIImage(named: "rick_morty_PNG19"))
     private let label = UILabel(text: """
                                Look Morty!
                               There nothing there!
-                              """,
-                                color: UIColor.titleColor(), font: 35,
+                              """, color: UIColor.titleColor(), font: 35,
                                 lines: 0, weight: .heavy, alignment: .center)
-    
+                                
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.backgroundColor()
@@ -41,6 +39,7 @@ class ErrorVieController: UIViewController {
                      leftConstant: 0,
                      bottomConstant: 0,
                      rightConstant: 0)
+    
         label.constraint(left: view.leftAnchor,
                          right: view.rightAnchor,
                          bottom: view.bottomAnchor,
