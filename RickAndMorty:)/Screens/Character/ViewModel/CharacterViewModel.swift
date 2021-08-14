@@ -6,7 +6,6 @@ protocol CharacterViewModelProtocol {
     var filteredNumberOfRows: Int { get }
     var rickAndMorty: RickyAndMorty? { get }
     var filterCharachter: [Character] { get set }
-    var urlString: String { get }
     
     func fetchData(urlString: String, completion: @escaping () -> Void)
     func viewModelCell(index: IndexPath) -> CharacterViewModelCellProtocol
@@ -15,16 +14,13 @@ protocol CharacterViewModelProtocol {
     func filteredDetailViewModel(index: IndexPath) -> DetailCharacterViewModelProtocol
 }
 
-class CharacterViewModel: CharacterViewModelProtocol {
+final class CharacterViewModel: CharacterViewModelProtocol {
 
     var networkDataFetcher: NetworkDataFetcherProtocol
     var characters: [Character] = []
     var filterCharachter: [Character] = []
     var rickAndMorty: RickyAndMorty?
-    
-    var urlString: String {
-        "https://rickandmortyapi.com/api/character"
-    }
+
     var numberOfRows: Int {
         characters.count
     }

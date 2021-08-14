@@ -6,9 +6,9 @@ protocol CharacterViewModelCellProtocol {
     init(character: Character)
 }
 
-class CharacterViewModelCell: CharacterViewModelCellProtocol {
+final class CharacterViewModelCell: CharacterViewModelCellProtocol {
     
-    let character: Character
+   private let character: Character
     
     var image: Data {
         let url = URL(string: character.image)

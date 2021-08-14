@@ -1,6 +1,6 @@
 import Foundation
 
-class ImageManager {
+final class ImageManager {
     
     static let shared = ImageManager()
     

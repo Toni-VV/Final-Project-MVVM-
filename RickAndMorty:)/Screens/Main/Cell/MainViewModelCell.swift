@@ -11,7 +11,7 @@ protocol MainViewModelCellProtocol {
     init(cell: Main)
 }
 
-class MainViewModelCell: MainViewModelCellProtocol {
+final class MainViewModelCell: MainViewModelCellProtocol {
    
    private let cell: Main
     

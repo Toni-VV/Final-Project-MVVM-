@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4783E16926C77ADA00A418D6 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4783E16826C77ADA00A418D6 /* APIClient.swift */; };
 		47D1624B26C16E7F00D82105 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D1624A26C16E7F00D82105 /* AppDelegate.swift */; };
 		47D1624D26C16E7F00D82105 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D1624C26C16E7F00D82105 /* SceneDelegate.swift */; };
 		47D1624F26C16E7F00D82105 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D1624E26C16E7F00D82105 /* MainViewController.swift */; };
@@ -35,11 +36,11 @@
 		47D162CB26C2D5D700D82105 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D162CA26C2D5D700D82105 /* Box.swift */; };
 		47D162CF26C2D87300D82105 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D162CE26C2D87300D82105 /* DataManager.swift */; };
 		47D162D526C2F95400D82105 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D162D426C2F95400D82105 /* FilterViewController.swift */; };
-		47D162D826C3417500D82105 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D162D726C3417500D82105 /* API.swift */; };
 		47D162DB26C3B72B00D82105 /* Alert + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D162DA26C3B72B00D82105 /* Alert + Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4783E16826C77ADA00A418D6 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		47D1624726C16E7F00D82105 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47D1624A26C16E7F00D82105 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47D1624C26C16E7F00D82105 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +71,6 @@
 		47D162CA26C2D5D700D82105 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		47D162CE26C2D87300D82105 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		47D162D426C2F95400D82105 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
-		47D162D726C3417500D82105 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		47D162DA26C3B72B00D82105 /* Alert + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alert + Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,7 +147,7 @@
 				47D1627526C1822200D82105 /* ImageManager.swift */,
 				47D1629826C25C4100D82105 /* NetworkService.swift */,
 				47D1629B26C25C5700D82105 /* NetworkDataFetcher.swift */,
-				47D162D726C3417500D82105 /* API.swift */,
+				4783E16826C77ADA00A418D6 /* APIClient.swift */,
 			);
 			path = NetworkServices;
 			sourceTree = "<group>";
@@ -174,7 +174,10 @@
 		47D1628B26C18ED400D82105 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				47D162DD26C3D26600D82105 /* Characters */,
+				47D1628926C18EC500D82105 /* Main */,
+				47D1629426C1C70400D82105 /* Character */,
+				47D162D326C2F93900D82105 /* Filter */,
+				47D162BD26C2D32700D82105 /* DetailCharacter */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -280,17 +283,6 @@
 			path = Filter;
 			sourceTree = "<group>";
 		};
-		47D162DD26C3D26600D82105 /* Characters */ = {
-			isa = PBXGroup;
-			children = (
-				47D1628926C18EC500D82105 /* Main */,
-				47D1629426C1C70400D82105 /* Character */,
-				47D162D326C2F93900D82105 /* Filter */,
-				47D162BD26C2D32700D82105 /* DetailCharacter */,
-			);
-			path = Characters;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -366,8 +358,8 @@
 				47D1628426C18DFB00D82105 /* MainCell.swift in Sources */,
 				47D162BF26C2D34E00D82105 /* DetailCharacterVC.swift in Sources */,
 				47D1626A26C173E500D82105 /* UIView + Ext.swift in Sources */,
+				4783E16926C77ADA00A418D6 /* APIClient.swift in Sources */,
 				47D162B026C28E0C00D82105 /* CharacterViewModel.swift in Sources */,
-				47D162D826C3417500D82105 /* API.swift in Sources */,
 				47D1627626C1822200D82105 /* ImageManager.swift in Sources */,
 				47D1628E26C18F0000D82105 /* MainViewModel.swift in Sources */,
 				47D1629626C1C71500D82105 /* CharacterViewController.swift in Sources */,

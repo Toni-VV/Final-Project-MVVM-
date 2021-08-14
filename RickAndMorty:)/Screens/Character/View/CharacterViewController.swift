@@ -1,6 +1,6 @@
 import UIKit
 
-class CharacterViewController: UIViewController {
+final class CharacterViewController: UIViewController {
     
     //MARK: - Properties
     
@@ -95,7 +95,7 @@ class CharacterViewController: UIViewController {
     }
     
     private func fetchData() {
-        viewModel.fetchData(urlString: viewModel.urlString) { [weak self] in
+        viewModel.fetchData(urlString: ApiClient.baseUrl) { [weak self] in
             self?.collectionView.reloadData()
             self?.spinnerView.stopAnimating()
         }
@@ -176,7 +176,8 @@ extension CharacterViewController: FilterViewContollerDelegate {
     
     func sendDelegateItems(gender: String, status: String) {
         viewModel.characters.removeAll()
-        let filterURL = viewModel.urlString + "?status=\(status)&gender=\(gender)"
+        let filterURL = ApiClient.absoluteString(status: status,
+                                                 gender: gender)
         viewModel.fetchData(urlString: filterURL) { [weak self] in
             self?.collectionView.reloadData()
         }

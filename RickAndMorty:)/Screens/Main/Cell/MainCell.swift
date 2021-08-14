@@ -1,19 +1,21 @@
 import UIKit
 
-class MainCell: UITableViewCell {
+
+
+final class MainCell: UITableViewCell {
     
     //MARK: - Properties
     
     static let identifier = "MainCell"
     
-   private let mainImage = UIImageView(contentMode: .scaleAspectFill,
-                                cornerRadius: 30)
-    
-   private let titleLabel = UILabel(color: .secondarySystemBackground,
-                             font: .systemFont(ofSize: 40,
-                                               weight: .semibold),
-                             lines: 1,
-                             alignment: .center)
+   
+    private let mainImage = UIImageView(contentMode: .scaleAspectFill,
+                                        cornerRadius: 30)
+    private let titleLabel = UILabel(color: .tertiarySystemBackground,
+                                     font: .systemFont(ofSize: 40,
+                                                       weight: .semibold),
+                                     lines: 1,
+                                     alignment: .center)
     
     var viewModel: MainViewModelCellProtocol! {
         didSet {

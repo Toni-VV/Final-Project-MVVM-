@@ -5,7 +5,7 @@ protocol FilterViewContollerDelegate: AnyObject {
                            status: String)
 }
 
-class FilterViewController: UIViewController {
+final class FilterViewController: UIViewController {
     
     //MARK: - Properties
     
@@ -271,8 +271,8 @@ extension FilterViewController {
                       and: "Please choose anyone")
             return
         }
-        delegate?.sendDelegateItems(gender: gender!,
-                                    status: status!)
+        delegate?.sendDelegateItems(gender: gender,
+                                    status: status)
         navigationController?.popViewController(animated: true)
     }
 }

@@ -10,7 +10,7 @@ protocol DetailCharacterViewModelProtocol {
     func favoriteButtonPressed()
 }
 
-class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
+final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
 
     private let character: Character
     

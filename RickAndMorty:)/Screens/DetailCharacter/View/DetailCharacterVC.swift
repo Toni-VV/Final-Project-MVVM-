@@ -1,6 +1,6 @@
 import UIKit
 
-class DetailCharacterVC: UIViewController {
+final class DetailCharacterVC: UIViewController {
     
     //MARK: - Properties
     

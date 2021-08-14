@@ -1,6 +1,6 @@
 import UIKit
 
-class CharacterCell: UICollectionViewCell {
+final class CharacterCell: UICollectionViewCell {
     
     //MARK: - Properties
     
@@ -39,6 +39,11 @@ class CharacterCell: UICollectionViewCell {
     
     //MARK: - Actions
     
+    override func prepareForReuse() {
+        characterImage.image = nil
+        nameLabel.text = nil
+    }
+    
     private func setupView() {
         [characterImage, blurEffectView, nameLabel].forEach(addSubview(_:))
         setupConstraints()
@@ -59,9 +64,5 @@ class CharacterCell: UICollectionViewCell {
                              right: contentView.rightAnchor,
                              bottom: contentView.bottomAnchor,
                              heightConstant: 30)
-    }
-    override func prepareForReuse() {
-        characterImage.image = nil
-        nameLabel.text = nil
     }
 }

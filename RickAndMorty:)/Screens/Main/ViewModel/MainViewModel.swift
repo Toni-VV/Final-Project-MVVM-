@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 protocol MainViewModelProtocol {
     var cells: [Main] { get }
@@ -6,8 +6,8 @@ protocol MainViewModelProtocol {
     func viewModelCell(index: IndexPath) -> MainViewModelCellProtocol
 }
 
-class MainViewModel: MainViewModelProtocol {
-    
+final class MainViewModel: MainViewModelProtocol {
+
     var cells: [Main] = [Main(titleLabel: "Characters",imageName: "Characters"),
                          Main(titleLabel: "Episodes", imageName: "Episodes"),
                          Main(titleLabel: "Locations", imageName: "Locations")]
