@@ -4,7 +4,6 @@ protocol DetailCharacterViewModelProtocol {
     var isFavorite: Box<Bool> { get }
     var title: String { get }
     var description: String { get }
-    var episodes: [String] { get }
     var characterImageData: Data { get }
     
     init(character: Character)
@@ -23,15 +22,11 @@ class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
     var description: String {
         character.description
     }
-    
-    var episodes: [String] {
-        character.episode
-    }
-    
+
     var characterImageData: Data {
         let url = URL(string: character.image)
         guard
-            let data = ImageManager.shared.fetchImage(url: url!)
+            let data = ImageManager.shared.fetchImage(url: url)
         else { return Data() }
         return data
     }

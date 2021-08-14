@@ -7,8 +7,6 @@ protocol FilterViewContollerDelegate: AnyObject {
 
 class FilterViewController: UIViewController {
     
-   
-    
     //MARK: - Properties
     
     weak var delegate: FilterViewContollerDelegate?

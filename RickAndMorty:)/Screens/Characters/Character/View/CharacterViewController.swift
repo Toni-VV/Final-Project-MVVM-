@@ -101,7 +101,6 @@ class CharacterViewController: UIViewController {
         }
     }
     
-    
     @objc private func didTapRightBarButton() {
         let vc = FilterViewController()
         vc.delegate = self

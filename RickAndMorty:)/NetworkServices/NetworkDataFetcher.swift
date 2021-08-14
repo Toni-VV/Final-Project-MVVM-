@@ -28,10 +28,13 @@ struct NetworkDataFetcher: NetworkDataFetcherProtocol {
         self.request(urlString: urlString) { (data, error) in
             if let error = error {
                 completion(.failure(error))
-                print("Error recieved requesting data",error.localizedDescription)
+                print("Requesting network error", error.localizedDescription)
                 return
             }
-            guard let data = data else { return }
+            guard let data = data else {
+                print("Error recieved requesting data")
+                return
+            }
             guard
                 let objects = self.networking.genericJsonDecoder(for: T.self, from: data)
             else { return }

@@ -6,7 +6,9 @@ class ImageManager {
     
     private init() {}
     
-    func fetchImage(url: URL) -> Data? {
-        return try? Data(contentsOf: url)
+    func fetchImage(url: URL?) -> Data? {
+        guard let url = url else { return nil }
+        guard let imageData = try? Data(contentsOf: url) else { return nil }
+        return imageData
     }
 }

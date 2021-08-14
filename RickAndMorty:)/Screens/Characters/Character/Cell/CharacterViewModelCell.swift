@@ -12,7 +12,7 @@ class CharacterViewModelCell: CharacterViewModelCellProtocol {
     
     var image: Data {
         let url = URL(string: character.image)
-        guard let data = ImageManager.shared.fetchImage(url: url!) else {
+        guard let data = ImageManager.shared.fetchImage(url: url) else {
             return Data()
         }
         return data

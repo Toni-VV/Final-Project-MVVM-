@@ -8,11 +8,8 @@ class DetailCharacterVC: UIViewController {
         didSet {
             characterImage.image = UIImage(data: viewModel.characterImageData)
             descriptionLabel.text = viewModel.description
-            episodes = viewModel.episodes
         }
     }
-    
-   private var episodes: [String] = []
     
     private let favoriteButton: UIButton = {
         let button = UIButton()
@@ -25,14 +22,7 @@ class DetailCharacterVC: UIViewController {
     private let descriptionLabel = UILabel(color: .white, font: 25)
     private let characterImage = UIImageView(contentMode: .scaleAspectFill,
                                           cornerRadius: 20)
-    private let episodeButton = UIButton(text: "Episodes",
-                                         color: UIColor.titleColor(),
-                                         aligment: .center,
-                                         borderColor: UIColor.titleColor().cgColor,
-                                         font: 25,
-                                         borderWidth: 1,
-                                         cornerRadius: 20)
-    
+
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -49,7 +39,7 @@ class DetailCharacterVC: UIViewController {
     private func setupView() {
         view.backgroundColor = UIColor.backgroundColor()
         [characterImage,favoriteButton,
-         descriptionLabel,episodeButton].forEach(view.addSubview(_:))
+         descriptionLabel].forEach(view.addSubview(_:))
         setupConstraints()
     }
     
@@ -74,13 +64,6 @@ class DetailCharacterVC: UIViewController {
                                     topConstant: 20,
                                     leftConstant: 20,
                                     rightConstant: 20)
-        episodeButton.constraint(left: view.leftAnchor,
-                                     right: view.rightAnchor,
-                                     bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                                     leftConstant: 20,
-                                     bottomConstant: 20,
-                                     rightConstant: 20,
-                                     heightConstant: 50)
     }
     
     private func setupFavoriteButton() {
