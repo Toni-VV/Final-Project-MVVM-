@@ -13,7 +13,6 @@ protocol DetailCharacterViewModelProtocol {
 final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
 
     private let character: Character
-    
     var isFavorite: Box<Bool>
     
     var title: String {
@@ -22,7 +21,6 @@ final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
     var description: String {
         character.description
     }
-
     var characterImageData: Data {
         let url = URL(string: character.image)
         guard

@@ -1,26 +1,20 @@
 import Foundation
 
 struct Main {
-    let titleLabel: String
-    let imageName: String
+    let commonLabel: String
 }
 
 protocol MainViewModelCellProtocol {
-    var image: String { get }
-    var title: String { get }
+    var commonString: String { get }
     init(cell: Main)
 }
 
 final class MainViewModelCell: MainViewModelCellProtocol {
-   
+    
    private let cell: Main
     
-    var title: String {
-        cell.titleLabel
-    }
-    
-    var image: String {
-        cell.imageName
+    var commonString: String {
+         (cell.commonLabel)
     }
 
     required init(cell: Main) {

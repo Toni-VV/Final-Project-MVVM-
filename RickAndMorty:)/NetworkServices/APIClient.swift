@@ -4,7 +4,7 @@ struct ApiClient {
     
     static let baseUrl =  "https://rickandmortyapi.com/api/character"
     
-    static func absoluteString(status: String, gender: String) -> String {
+    static func absoluteUrlString(status: String, gender: String) -> String {
         let endPoint = "?status=\(status)&gender=\(gender)"
         return ApiClient.baseUrl + endPoint
     }
@@ -13,9 +13,7 @@ struct ApiClient {
 enum APIError: Error {
     case requestFailed
     case invalidData
-    case responseUnsuccessful
     case jsonParsingFailed
-    case jsonConversionFailed
     
     var localizedDescription: String {
         switch self {
@@ -23,12 +21,8 @@ enum APIError: Error {
             return "Request Failed"
         case .invalidData:
             return "Invalid Data"
-        case .responseUnsuccessful:
-            return "Response Unsuccessful"
         case .jsonParsingFailed:
             return "Json Parsing Failed"
-        case .jsonConversionFailed:
-            return "Json Conversion Failed"
         }
     }
 }

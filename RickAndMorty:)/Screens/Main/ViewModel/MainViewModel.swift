@@ -7,10 +7,10 @@ protocol MainViewModelProtocol {
 }
 
 final class MainViewModel: MainViewModelProtocol {
-
-    var cells: [Main] = [Main(titleLabel: "Characters",imageName: "Characters"),
-                         Main(titleLabel: "Episodes", imageName: "Episodes"),
-                         Main(titleLabel: "Locations", imageName: "Locations")]
+    
+    var cells: [Main] = [Main(commonLabel: "Characters"),
+                         Main(commonLabel: "Episodes"),
+                         Main(commonLabel: "Locations")]
     
     var numberOfRows: Int {
         cells.count

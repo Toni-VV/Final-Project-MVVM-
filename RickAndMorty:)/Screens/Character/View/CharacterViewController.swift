@@ -176,7 +176,7 @@ extension CharacterViewController: FilterViewContollerDelegate {
     
     func sendDelegateItems(gender: String, status: String) {
         viewModel.characters.removeAll()
-        let filterURL = ApiClient.absoluteString(status: status,
+        let filterURL = ApiClient.absoluteUrlString(status: status,
                                                  gender: gender)
         viewModel.fetchData(urlString: filterURL) { [weak self] in
             self?.collectionView.reloadData()

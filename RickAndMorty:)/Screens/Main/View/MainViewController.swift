@@ -30,7 +30,8 @@ final class MainViewController: UIViewController {
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.frame = view.bounds
-        tableView.rowHeight = (view.bounds.height) / 3.5
+        let cellHeight = (view.bounds.height) / 3.5
+        tableView.rowHeight = cellHeight
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -56,11 +57,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        switch indexPath.row {
-        case 0:
+        if indexPath.row == 0 {
             let vc = CharacterViewController()
             navigationController?.pushViewController(vc, animated: true)
-        default: break
         }
     }
 }

@@ -20,8 +20,8 @@ final class MainCell: UITableViewCell {
     var viewModel: MainViewModelCellProtocol! {
         didSet {
             mainImage.image = applyFilter(intensity: 0.4,
-                                          image: viewModel.image)
-            titleLabel.text = viewModel.title
+                                          image: viewModel.commonString)
+            titleLabel.text = viewModel.commonString
         }
     }
     
