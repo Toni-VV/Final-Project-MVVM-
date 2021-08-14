@@ -6,25 +6,25 @@ final class CharacterCell: UICollectionViewCell {
     
     static let identifier = "CharacterCell"
     
-    private let characterImage = UIImageView(contentMode: .scaleAspectFill,
-                                             cornerRadius: 20)
-    private let nameLabel = UILabel(color: .black,
-                                    font: 20, lines: 1,
-                                    weight: .regular,
-                                     alignment: .center)
-    
-    private lazy var blurEffectView: UIVisualEffectView = {
-        let v = UIBlurEffect(style: .light)
-        let blurEffect = UIVisualEffectView(effect: v)
-        return blurEffect
-    }()
-    
     var viewModel: CharacterViewModelCellProtocol! {
         didSet {
             characterImage.image = UIImage(data: viewModel.image)
             nameLabel.text = viewModel.name
         }
     }
+    
+    private let characterImage = UIImageView(contentMode: .scaleAspectFill,
+                                             cornerRadius: 20)
+    private let nameLabel = UILabel(color: .black,
+                                    font: 20, lines: 1,
+                                    weight: .regular,
+                                    alignment: .center)
+    
+    private lazy var blurEffectView: UIVisualEffectView = {
+        let v = UIBlurEffect(style: .light)
+        let blurEffect = UIVisualEffectView(effect: v)
+        return blurEffect
+    }()
     
     //MARK: - Init
     

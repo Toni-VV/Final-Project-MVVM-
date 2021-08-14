@@ -8,12 +8,6 @@ final class MainCell: UITableViewCell {
     
     static let identifier = "MainCell"
     
-   
-    private let mainImage = UIImageView(contentMode: .scaleAspectFill,
-                                        cornerRadius: 30)
-    private let titleLabel = UILabel(color: .tertiarySystemBackground,
-                                     font: 25, lines: 1, weight: .medium, alignment: .center)
-    
     var viewModel: MainViewModelCellProtocol! {
         didSet {
             mainImage.image = applyFilter(intensity: 0.4,
@@ -21,7 +15,13 @@ final class MainCell: UITableViewCell {
             titleLabel.text = viewModel.commonString
         }
     }
-    
+   
+    private let mainImage = UIImageView(contentMode: .scaleAspectFill,
+                                        cornerRadius: 30)
+    private let titleLabel = UILabel(color: .tertiarySystemBackground,
+                                     font: 45, lines: 1,
+                                     weight: .bold, alignment: .center)
+
     //MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

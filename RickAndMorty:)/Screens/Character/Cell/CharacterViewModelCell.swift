@@ -8,8 +8,6 @@ protocol CharacterViewModelCellProtocol {
 
 final class CharacterViewModelCell: CharacterViewModelCellProtocol {
     
-   private let character: Character
-    
     var image: Data {
         let url = URL(string: character.image)
         guard let data = ImageManager.shared.fetchImage(url: url) else {
@@ -21,6 +19,8 @@ final class CharacterViewModelCell: CharacterViewModelCellProtocol {
     var name: String {
         character.name
     }
+    
+    private let character: Character
     
     required init(character: Character) {
         self.character = character

@@ -19,7 +19,6 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.backgroundColor()
-        
         setupNavigationBar(name: "Choose Section",
                            backButton: false)
         setupTableView()
@@ -65,6 +64,5 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             vc.modalPresentationStyle = .formSheet
             present(vc, animated: true)
         }
-        
     }
 }

@@ -9,20 +9,44 @@ import UIKit
 
 class ErrorVieController: UIViewController {
     
-    let image = UIImageView(image: UIImage(named: "rick_morty_PNG19"))
-    let label = UILabel(text: "Nothing There Morty...", color: .label, font: 35,
-                        lines: 0, weight: .heavy, alignment: .center)
+    
+    private let image = UIImageView(image: UIImage(named: "rick_morty_PNG19"))
+    private let label = UILabel(text: """
+                               Look Morty!
+                              There nothing there!
+                              """,
+                                color: UIColor.titleColor(), font: 35,
+                                lines: 0, weight: .heavy, alignment: .center)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .tertiarySystemBackground
+        view.backgroundColor = UIColor.backgroundColor()
         setupVieew()
     }
     
     private func setupVieew() {
         [image,label].forEach { view.addSubview($0)}
-        image.frame = view.bounds
+        
         image.contentMode = .scaleAspectFit
-        label.constraint(left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, leftConstant: 20, bottomConstant: 20, rightConstant: 20, heightConstant: view.bounds.height / 5)
+        
+       setupConstraints()
+    }
+    
+  private func setupConstraints() {
+    image.constraint(top: view.topAnchor,
+                     left: view.leftAnchor,
+                     right: view.rightAnchor,
+                     bottom: label.topAnchor,
+                     topConstant: 0,
+                     leftConstant: 0,
+                     bottomConstant: 0,
+                     rightConstant: 0)
+        label.constraint(left: view.leftAnchor,
+                         right: view.rightAnchor,
+                         bottom: view.bottomAnchor,
+                         leftConstant: 20,
+                         bottomConstant: 10,
+                         rightConstant: 20,
+                         heightConstant: view.bounds.height / 5.2)
     }
 }

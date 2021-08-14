@@ -32,7 +32,6 @@ extension UIView{
             constraints.append(bottomAnchor.constraint(equalTo: bottom,
                                                        constant: -bottomConstant))
         }
-        
         if widthConstant > 0{
             constraints.append(widthAnchor.constraint(equalToConstant: widthConstant))
         }

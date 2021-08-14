@@ -11,12 +11,12 @@ protocol MainViewModelCellProtocol {
 
 final class MainViewModelCell: MainViewModelCellProtocol {
     
-   private let cell: Main
-    
     var commonString: String {
          (cell.commonLabel)
     }
 
+    private let cell: Main
+    
     required init(cell: Main) {
         self.cell = cell
     }

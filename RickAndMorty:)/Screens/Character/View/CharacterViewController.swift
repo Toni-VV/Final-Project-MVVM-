@@ -24,7 +24,6 @@ final class CharacterViewController: UIViewController {
         return collectionView
     }()
     
-    
     private var spinnerView = UIActivityIndicatorView()
     private let searchController = UISearchController(searchResultsController: nil)
     
@@ -177,7 +176,7 @@ extension CharacterViewController: FilterViewContollerDelegate {
     func sendDelegateItems(gender: String, status: String) {
         viewModel.characters.removeAll()
         let filterURL = ApiClient.absoluteUrlString(status: status,
-                                                 gender: gender)
+                                                    gender: gender)
         viewModel.fetchData(urlString: filterURL) { [weak self] in
             self?.collectionView.reloadData()
         }

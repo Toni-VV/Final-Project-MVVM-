@@ -12,7 +12,6 @@ protocol DetailCharacterViewModelProtocol {
 
 final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
 
-    private let character: Character
     var isFavorite: Box<Bool>
     
     var title: String {
@@ -28,6 +27,8 @@ final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
         else { return Data() }
         return data
     }
+    
+    private let character: Character
 
     required init(character: Character) {
         self.character = character

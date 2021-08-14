@@ -32,7 +32,8 @@ extension UIViewController {
         }
     }
     
-    func configButtonsAndLabelsStack(buttons: [UIButton], labels: [UILabel]) -> UIStackView {
+    func configButtonsAndLabelsStack(buttons: [UIButton],
+                                     labels: [UILabel]) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: buttons,
                                      axis: .vertical,
                                      spacing: 12,
@@ -46,7 +47,8 @@ extension UIViewController {
         return stackView2
     }
     
-    func configStatusAndResetStack(label: UILabel, button: UIButton) -> UIStackView {
+    func configStatusAndResetStack(label: UILabel,
+                                   button: UIButton) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [label, button],
                                     axis: .horizontal,
                                     spacing: 0, alignment: .fill)

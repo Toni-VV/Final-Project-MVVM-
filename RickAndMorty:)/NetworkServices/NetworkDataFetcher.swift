@@ -41,7 +41,6 @@ struct NetworkDataFetcher: NetworkDataFetcherProtocol {
                 completion(.failure(.jsonParsingFailed))
                 return
             }
-            
             completion(.success(objects))
         }
     }
@@ -49,8 +48,7 @@ struct NetworkDataFetcher: NetworkDataFetcherProtocol {
     func fetchCharacter(urlString: String,
                         completion: @escaping (Result<RickyAndMorty, APIError>) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
-            self.fetchGenericJsonData(urlString: urlString,
-                                      completion: completion)
+            self.fetchGenericJsonData(urlString: urlString, completion: completion)
         }
     }
 }

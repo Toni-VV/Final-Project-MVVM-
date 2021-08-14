@@ -16,7 +16,6 @@ protocol CharacterViewModelProtocol {
 
 final class CharacterViewModel: CharacterViewModelProtocol {
 
-    var networkDataFetcher: NetworkDataFetcherProtocol
     var characters: [Character] = []
     var filterCharachter: [Character] = []
     var rickAndMorty: RickyAndMorty?
@@ -27,6 +26,8 @@ final class CharacterViewModel: CharacterViewModelProtocol {
     var filteredNumberOfRows: Int {
         filterCharachter.count
     }
+    
+    private var networkDataFetcher: NetworkDataFetcherProtocol
     
     init(networkDataFetcher: NetworkDataFetcherProtocol = NetworkDataFetcher()) {
         self.networkDataFetcher = networkDataFetcher
@@ -43,7 +44,7 @@ final class CharacterViewModel: CharacterViewModelProtocol {
                         completion()
                 }
             case .failure(let error):
-                print("Network fetch error", error.localizedDescription)
+                print("Network fetch data error", error.localizedDescription)
             }
         }
     }
@@ -63,7 +64,7 @@ final class CharacterViewModel: CharacterViewModelProtocol {
         return DetailCharacterViewModel(character: detailCharacter)
     }
     func filteredDetailViewModel(index: IndexPath) -> DetailCharacterViewModelProtocol {
-        let detailCharacter = filterCharachter[index.row]
-        return DetailCharacterViewModel(character: detailCharacter)
+        let detailFilteredCharacter = filterCharachter[index.row]
+        return DetailCharacterViewModel(character: detailFilteredCharacter)
     }
 }

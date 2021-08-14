@@ -10,7 +10,6 @@ final class FilterViewController: UIViewController {
     //MARK: - Properties
     
     weak var delegate: FilterViewContollerDelegate?
-    
     var gender: String!
     var status: String!
     
@@ -68,13 +67,15 @@ final class FilterViewController: UIViewController {
                                        rightConstant: 20,
                                        heightConstant: 50)
         
-        let statusButtonsAndLabelsStack = configButtonsAndLabelsStack(buttons: [aliveButton,deadButton,unknownButton],
-                                                             labels: [aliveLabel,deadLabel,unknownLabel])
+        let statusButtonsAndLabelsStack = configButtonsAndLabelsStack(
+            buttons: [aliveButton,deadButton,unknownButton],
+            labels: [aliveLabel,deadLabel,unknownLabel]
+        )
         view.addSubview(statusButtonsAndLabelsStack)
         statusButtonsAndLabelsStack.constraint(top: statusAndResetStack.bottomAnchor,
-                                      left: view.leftAnchor,
-                                      topConstant: 20,
-                                      leftConstant: 20)
+                                               left: view.leftAnchor,
+                                               topConstant: 20,
+                                               leftConstant: 20)
         
         let genderAndResetStack = configStatusAndResetStack(label: genderLabel,
                                                             button: resetButton2)
@@ -87,13 +88,15 @@ final class FilterViewController: UIViewController {
                                        rightConstant: 20,
                                        heightConstant: 50)
         
-        let genderButtonsAndLabelsStack = configButtonsAndLabelsStack(buttons: [femaleButton,maleButton,genderlessButton,unknownbutton2],
-                                                             labels: [femaleLabel,maleLabel,genderlessLabel,unknownLabel2])
+        let genderButtonsAndLabelsStack = configButtonsAndLabelsStack(
+            buttons: [femaleButton,maleButton,genderlessButton,unknownbutton2],
+            labels: [femaleLabel,maleLabel,genderlessLabel,unknownLabel2]
+        )
         view.addSubview(genderButtonsAndLabelsStack)
         genderButtonsAndLabelsStack.constraint(top: genderAndResetStack.bottomAnchor,
-                                      left: view.leftAnchor,
-                                      topConstant: 20,
-                                      leftConstant: 20)
+                                               left: view.leftAnchor,
+                                               topConstant: 20,
+                                               leftConstant: 20)
         view.addSubview(applyFilterButton)
         applyFilterButton.constraint(left: view.leftAnchor,
                                      right: view.rightAnchor,
@@ -127,7 +130,7 @@ extension FilterViewController {
         
         applyFilterButton.addTarget(self, action: #selector(didTapApplyFilterButton), for: .touchUpInside)
     }
-   
+    
     @objc private func didTapStatusButton(buttons: UIButton) {
         let color = UIColor.titleColor()
         switch buttons.tag {
@@ -267,7 +270,7 @@ extension FilterViewController {
         guard gender != "" || status != ""
         else
         {
-            showAlert(with: "NO FILTERS SELECTED",
+            showAlert(with: "No Filters Selected!",
                       and: "Please choose anyone")
             return
         }

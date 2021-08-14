@@ -2,7 +2,7 @@ import UIKit
 
 extension UIImageView {
     
-    convenience init(contentMode: UIView.ContentMode,
+    convenience init(contentMode: UIView.ContentMode = .scaleAspectFill,
                      cornerRadius: CGFloat) {
         self.init()
         self.contentMode = contentMode
