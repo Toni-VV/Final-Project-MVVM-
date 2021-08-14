@@ -9,9 +9,9 @@ final class CharacterCell: UICollectionViewCell {
     private let characterImage = UIImageView(contentMode: .scaleAspectFill,
                                              cornerRadius: 20)
     private let nameLabel = UILabel(color: .black,
-                                    font: .systemFont(ofSize: 20,
-                                                      weight: .regular),
-                                    lines: 1, alignment: .center)
+                                    font: 20, lines: 1,
+                                    weight: .regular,
+                                     alignment: .center)
     
     private lazy var blurEffectView: UIVisualEffectView = {
         let v = UIBlurEffect(style: .light)

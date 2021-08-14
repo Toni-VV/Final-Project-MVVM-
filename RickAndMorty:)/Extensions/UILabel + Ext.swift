@@ -4,13 +4,14 @@ extension UILabel {
     
     convenience init(text: String? = nil,
                      color: UIColor,
-                     font: UIFont,
+                     font: CGFloat,
                      lines: Int,
-                     alignment: NSTextAlignment) {
+                     weight: UIFont.Weight,
+                     alignment: NSTextAlignment = .center) {
         self.init()
         self.text = text
         self.textColor = color
-        self.font = font
+        self.font = UIFont.systemFont(ofSize: font, weight: weight)
         self.textAlignment = alignment
         self.adjustsFontSizeToFitWidth = true
         self.numberOfLines = lines

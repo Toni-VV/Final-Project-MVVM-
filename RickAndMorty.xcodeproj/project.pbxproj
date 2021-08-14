@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4783E16926C77ADA00A418D6 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4783E16826C77ADA00A418D6 /* APIClient.swift */; };
+		4783E17226C7BB4A00A418D6 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4783E17126C7BB4A00A418D6 /* ErrorViewController.swift */; };
 		47D1624B26C16E7F00D82105 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D1624A26C16E7F00D82105 /* AppDelegate.swift */; };
 		47D1624D26C16E7F00D82105 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D1624C26C16E7F00D82105 /* SceneDelegate.swift */; };
 		47D1624F26C16E7F00D82105 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D1624E26C16E7F00D82105 /* MainViewController.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		4783E16826C77ADA00A418D6 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		4783E17126C7BB4A00A418D6 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		47D1624726C16E7F00D82105 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47D1624A26C16E7F00D82105 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47D1624C26C16E7F00D82105 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				47D1629426C1C70400D82105 /* Character */,
 				47D162D326C2F93900D82105 /* Filter */,
 				47D162BD26C2D32700D82105 /* DetailCharacter */,
+				4783E17126C7BB4A00A418D6 /* ErrorViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				47D1628E26C18F0000D82105 /* MainViewModel.swift in Sources */,
 				47D1629626C1C71500D82105 /* CharacterViewController.swift in Sources */,
 				47D162CF26C2D87300D82105 /* DataManager.swift in Sources */,
+				4783E17226C7BB4A00A418D6 /* ErrorViewController.swift in Sources */,
 				47D1624B26C16E7F00D82105 /* AppDelegate.swift in Sources */,
 				47D1629226C1946A00D82105 /* UIImage + Ext.swift in Sources */,
 				47D162C726C2D43E00D82105 /* DetailCharacterViewModel.swift in Sources */,

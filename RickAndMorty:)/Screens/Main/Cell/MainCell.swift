@@ -12,10 +12,7 @@ final class MainCell: UITableViewCell {
     private let mainImage = UIImageView(contentMode: .scaleAspectFill,
                                         cornerRadius: 30)
     private let titleLabel = UILabel(color: .tertiarySystemBackground,
-                                     font: .systemFont(ofSize: 40,
-                                                       weight: .semibold),
-                                     lines: 1,
-                                     alignment: .center)
+                                     font: 25, lines: 1, weight: .medium, alignment: .center)
     
     var viewModel: MainViewModelCellProtocol! {
         didSet {

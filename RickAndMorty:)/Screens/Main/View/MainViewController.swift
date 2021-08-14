@@ -60,6 +60,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             let vc = CharacterViewController()
             navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = ErrorVieController()
+            vc.modalPresentationStyle = .formSheet
+            present(vc, animated: true)
         }
+        
     }
 }
