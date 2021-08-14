@@ -11,8 +11,8 @@ protocol CharacterViewModelProtocol {
     func fetchData(urlString: String, completion: @escaping () -> Void)
     func viewModelCell(index: IndexPath) -> CharacterViewModelCellProtocol
     func filterViewModelCell(index: IndexPath) -> CharacterViewModelCellProtocol
-    func detailViewModel(index: IndexPath) -> DetailCharacterViewModel
-    func filteredDetailViewModel(index: IndexPath) -> DetailCharacterViewModel
+    func detailViewModel(index: IndexPath) -> DetailCharacterViewModelProtocol
+    func filteredDetailViewModel(index: IndexPath) -> DetailCharacterViewModelProtocol
 }
 
 class CharacterViewModel: CharacterViewModelProtocol {
@@ -62,11 +62,11 @@ class CharacterViewModel: CharacterViewModelProtocol {
         return CharacterViewModelCell(character: filterCell) 
     }
     
-    func detailViewModel(index: IndexPath) -> DetailCharacterViewModel {
+    func detailViewModel(index: IndexPath) -> DetailCharacterViewModelProtocol {
         let detailCharacter = characters[index.row]
         return DetailCharacterViewModel(character: detailCharacter)
     }
-    func filteredDetailViewModel(index: IndexPath) -> DetailCharacterViewModel {
+    func filteredDetailViewModel(index: IndexPath) -> DetailCharacterViewModelProtocol {
         let detailCharacter = filterCharachter[index.row]
         return DetailCharacterViewModel(character: detailCharacter)
     }
