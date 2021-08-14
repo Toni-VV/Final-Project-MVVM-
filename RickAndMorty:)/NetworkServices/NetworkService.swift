@@ -2,7 +2,7 @@ import Foundation
 
 protocol NetworkingProtocol {
     func request(from url: URL,
-                 completion: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask
+                 completion: @escaping (Data?, APIError?) -> Void) -> URLSessionDataTask
     func genericJsonDecoder<T: Decodable>(for type: T.Type,
                                           from data: Data?) -> T?
 }
@@ -10,10 +10,10 @@ protocol NetworkingProtocol {
 struct NetworkService: NetworkingProtocol {
     
     func request(from url: URL,
-                 completion: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask {
+                 completion: @escaping (Data?, APIError?) -> Void) -> URLSessionDataTask {
         return URLSession.shared.dataTask(with: url) { (data, _, error) in
             DispatchQueue.main.async {
-                completion(data,error)
+                completion(data,error as? APIError)
             }
         }
     }

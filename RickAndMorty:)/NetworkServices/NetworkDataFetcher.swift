@@ -2,7 +2,7 @@ import Foundation
 
 protocol NetworkDataFetcherProtocol {
     func fetchCharacter(urlString: String,
-                        completion: @escaping (Result<RickyAndMorty, Error>) -> Void)
+                        completion: @escaping (Result<RickyAndMorty, APIError>) -> Void)
 }
 
 struct NetworkDataFetcher: NetworkDataFetcherProtocol {
@@ -14,7 +14,7 @@ struct NetworkDataFetcher: NetworkDataFetcherProtocol {
     }
     
     private func request(urlString: String,
-                         completion: @escaping (Data?, Error?) -> Void) {
+                         completion: @escaping (Data?, APIError?) -> Void) {
         guard
             let url = URL(string: urlString)
         else { return }
@@ -24,27 +24,30 @@ struct NetworkDataFetcher: NetworkDataFetcherProtocol {
     }
     
     private func fetchGenericJsonData<T: Decodable>(urlString: String,
-                                         completion: @escaping (Result<T, Error>) -> Void) {
+                                         completion: @escaping (Result<T, APIError>) -> Void) {
         self.request(urlString: urlString) { (data, error) in
             if let error = error {
-                completion(.failure(error))
-                print("Requesting network error", error.localizedDescription)
+                print("Error",error.localizedDescription)
                 return
             }
             guard let data = data else {
-                print("Error recieved requesting data")
+                completion(.failure(.invalidData))
                 return
             }
             guard
-                let objects = self.networking.genericJsonDecoder(for: T.self, from: data)
-            else { return }
+                let objects = self.networking.genericJsonDecoder(for: T.self,
+                                                                 from: data)
+            else {
+                completion(.failure(.jsonParsingFailed))
+                return
+            }
             
             completion(.success(objects))
         }
     }
     
     func fetchCharacter(urlString: String,
-                        completion: @escaping (Result<RickyAndMorty, Error>) -> Void) {
+                        completion: @escaping (Result<RickyAndMorty, APIError>) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
             self.fetchGenericJsonData(urlString: urlString,
                                       completion: completion)
