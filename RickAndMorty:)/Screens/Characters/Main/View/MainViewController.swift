@@ -3,7 +3,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     //MARK: - Properties
-    
+   
   private var viewModel: MainViewModelProtocol = MainViewModel()
     
     private let tableView: UITableView = {
@@ -19,9 +19,10 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.backgroundColor()
-        setupTableView()
+        
         setupNavigationBar(name: "Choose Section",
                            backButton: false)
+        setupTableView()
     }
     
     //MARK: - Actions
@@ -29,8 +30,7 @@ class MainViewController: UIViewController {
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.frame = view.bounds
-        let size = view.safeAreaInsets.top + view.safeAreaInsets.bottom
-        tableView.rowHeight = (view.bounds.height - size) / 3
+        tableView.rowHeight = (view.bounds.height) / 3.5
         tableView.delegate = self
         tableView.dataSource = self
     }
