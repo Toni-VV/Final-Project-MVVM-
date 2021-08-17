@@ -60,11 +60,9 @@ final class CharacterViewModel: CharacterViewModelProtocol {
     }
     
     func detailViewModel(index: IndexPath) -> DetailCharacterViewModelProtocol {
-        let detailCharacter = characters[index.row]
-        return DetailCharacterViewModel(character: detailCharacter)
+        return DetailCharacterViewModel(characters: characters, index: index.row)
     }
     func filteredDetailViewModel(index: IndexPath) -> DetailCharacterViewModelProtocol {
-        let detailFilteredCharacter = filterCharachter[index.row]
-        return DetailCharacterViewModel(character: detailFilteredCharacter)
+        return DetailCharacterViewModel(characters: filterCharachter, index: index.row)
     }
 }

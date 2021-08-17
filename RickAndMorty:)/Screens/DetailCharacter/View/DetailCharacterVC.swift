@@ -6,11 +6,16 @@ final class DetailCharacterVC: UIViewController {
     
     var viewModel: DetailCharacterViewModelProtocol! {
         didSet {
+            title = viewModel.title
             characterImage.image = UIImage(data: viewModel.characterImageData)
             descriptionLabel.text = viewModel.description
         }
     }
-    
+    private let nextButton = UIButton(systemName: "chevron.right.2",
+                                      tintColor: UIColor.titleColor())
+    private let previousButton = UIButton(systemName: "chevron.left.2",
+                                          tintColor: UIColor.titleColor())
+
     private let favoriteButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "suit.heart.fill")
@@ -27,11 +32,11 @@ final class DetailCharacterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar(name: viewModel.title,
+        setupNavigationBar(name: title ?? "",
                            action: #selector(didTapBackButton))
         setupView()
         setupFavoriteButton()
-        
+        buttonActions()
     }
     
     //MARK: - Actions
@@ -39,7 +44,7 @@ final class DetailCharacterVC: UIViewController {
     private func setupView() {
         view.backgroundColor = UIColor.backgroundColor()
         [characterImage,favoriteButton,
-         descriptionLabel].forEach(view.addSubview(_:))
+         descriptionLabel, nextButton, previousButton].forEach(view.addSubview(_:))
         setupConstraints()
     }
     
@@ -61,9 +66,32 @@ final class DetailCharacterVC: UIViewController {
         descriptionLabel.constraint(top: characterImage.bottomAnchor,
                                     left: view.leftAnchor,
                                     right: view.rightAnchor,
+                                    bottom: nextButton.topAnchor,
                                     topConstant: 20,
-                                    leftConstant: 20,
+                                    leftConstant: 20, bottomConstant: 20,
                                     rightConstant: 20)
+        
+        let widthSize = view.frame.size.width / 4
+        let height = view.frame.size.height / 10
+        nextButton.constraint(right: view.rightAnchor,
+                              bottom: view.bottomAnchor,
+                              bottomConstant: 20,
+                              widthConstant: widthSize,
+                              heightConstant: height)
+        previousButton.constraint(left: view.leftAnchor,
+                                  bottom: view.bottomAnchor,
+                                  bottomConstant: 20,
+                                  widthConstant: widthSize,
+                                  heightConstant: height )
+    }
+    
+    private func buttonActions() {
+        nextButton.addTarget(self,
+                             action: #selector(didTapNextButton),
+                             for: .touchUpInside)
+        previousButton.addTarget(self,
+                                 action: #selector(didTapPreviousButton),
+                                 for: .touchUpInside)
     }
     
     private func setupFavoriteButton() {
@@ -84,9 +112,22 @@ final class DetailCharacterVC: UIViewController {
     @objc private func didTapFavoriteButton() {
         viewModel.favoriteButtonPressed()
     }
+
+    @objc private func didTapNextButton() {
+        if viewModel.index < viewModel.characters.count - 1 {
+            viewModel = DetailCharacterViewModel(characters: viewModel.characters,
+                                                 index: viewModel.index + 1)
+        }
+    }
+    
+    @objc private func didTapPreviousButton() {
+        if viewModel.index > 0 {
+            viewModel = DetailCharacterViewModel(characters: viewModel.characters,
+                                                 index: viewModel.index - 1)
+        }
+    }
     
     @objc private func didTapBackButton() {
         navigationController?.popViewController(animated: true)
     }
-
 }

@@ -10,7 +10,7 @@ extension UIButton {
         let image = UIImage(systemName: systemName)
         self.setImage(image, for: .normal)
         self.setBackgroundImage(UIImage(systemName: systemName), for: .normal)
-        self.contentMode = .scaleAspectFill
+        self.contentMode = .scaleAspectFit
         self.tintColor = tintColor
         self.clipsToBounds = true
     }

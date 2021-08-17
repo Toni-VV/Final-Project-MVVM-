@@ -5,13 +5,17 @@ protocol DetailCharacterViewModelProtocol {
     var title: String { get }
     var description: String { get }
     var characterImageData: Data { get }
+    var index: Int { get set }
+    var characters: [Character] { get }
     
-    init(character: Character)
+    init(characters: [Character], index: Int)
     func favoriteButtonPressed()
 }
 
 final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
 
+    var characters: [Character]
+    var index: Int
     var isFavorite: Box<Bool>
     
     var title: String {
@@ -30,14 +34,16 @@ final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
     
     private let character: Character
 
-    required init(character: Character) {
-        self.character = character
-        self.isFavorite = Box(value: DataManager.shared.getFavoriteStatus(for: character.name))
+    required init(characters: [Character], index: Int) {
+        self.index = index
+        self.characters = characters
+        self.character = characters[index]
+        self.isFavorite = Box(value: DataManager.shared.getFavoriteStatus(for: character.description))
     }
     
     func favoriteButtonPressed() {
         isFavorite.value.toggle()
-        DataManager.shared.setFavoriteStatus(for: character.name,
+        DataManager.shared.setFavoriteStatus(for: character.description,
                                              with: isFavorite.value)
     }
 }
