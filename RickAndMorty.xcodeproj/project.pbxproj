@@ -162,21 +162,11 @@
 			path = NetworkServices;
 			sourceTree = "<group>";
 		};
-		47D1628726C18EB900D82105 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				47D1628026C18BDB00D82105 /* MainViewModelCell.swift */,
-				47D1628326C18DFB00D82105 /* MainCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		47D1628926C18EC500D82105 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				47D162B726C2955000D82105 /* View */,
 				47D162B526C2954200D82105 /* ViewModel */,
-				47D1628726C18EB900D82105 /* Cell */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -196,26 +186,17 @@
 		47D1629426C1C70400D82105 /* Character */ = {
 			isa = PBXGroup;
 			children = (
-				47D162A426C2675900D82105 /* Cell */,
 				47D162B226C2946700D82105 /* View */,
 				47D162B326C2947600D82105 /* ViewModel */,
 			);
 			path = Character;
 			sourceTree = "<group>";
 		};
-		47D162A426C2675900D82105 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				47D162A926C284AC00D82105 /* CharacterCell.swift */,
-				47D162AC26C284BF00D82105 /* CharacterViewModelCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		47D162B226C2946700D82105 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				47D1629526C1C71500D82105 /* CharacterViewController.swift */,
+				47D162A926C284AC00D82105 /* CharacterCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				47D162AF26C28E0C00D82105 /* CharacterViewModel.swift */,
+				47D162AC26C284BF00D82105 /* CharacterViewModelCell.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -232,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				47D1628D26C18F0000D82105 /* MainViewModel.swift */,
+				47D1628026C18BDB00D82105 /* MainViewModelCell.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -240,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				47D1624E26C16E7F00D82105 /* MainViewController.swift */,
+				47D1628326C18DFB00D82105 /* MainCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -540,7 +524,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Anton.First.RickAndMorty--";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -559,7 +543,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Anton.First.RickAndMorty--";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

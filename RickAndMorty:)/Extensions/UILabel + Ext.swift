@@ -11,7 +11,8 @@ extension UILabel {
         self.init()
         self.text = text
         self.textColor = color
-        self.font = UIFont.systemFont(ofSize: font, weight: weight)
+        let font = UIFont(name: "Copperplate-Bold", size: font)
+        self.font = font
         self.textAlignment = alignment
         self.adjustsFontSizeToFitWidth = true
         self.numberOfLines = lines
@@ -23,18 +24,23 @@ extension UILabel {
                      lines: Int = 0) {
         self.init()
         self.textColor = color
-        self.font = UIFont.systemFont(ofSize: font)
+        let font = UIFont(name: "Noteworthy-Light", size: font)
+        self.font = font
         self.textAlignment = .left
         self.adjustsFontSizeToFitWidth = true
         self.numberOfLines = lines
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    convenience init(text: String, textColor: UIColor = UIColor.white,font: CGFloat) {
+    convenience init(text: String,
+                     textColor: UIColor = UIColor.white,
+                     font: CGFloat,
+                     weight: UIFont.Weight = .bold) {
         self.init()
         self.text = text
         self.textColor = textColor
-        self.font = UIFont.systemFont(ofSize: font)
+        self.font = UIFont.systemFont(ofSize: font,
+                                      weight: weight)
         self.textAlignment = .left
         self.adjustsFontSizeToFitWidth = true
         self.numberOfLines = 1

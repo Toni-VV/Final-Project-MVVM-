@@ -9,13 +9,14 @@ final class DetailCharacterVC: UIViewController {
             title = viewModel.title
             characterImage.image = UIImage(data: viewModel.characterImageData)
             descriptionLabel.text = viewModel.description
+            charactersCountLabel.text = "\(viewModel.index + 1) of \(viewModel.characters.count)"
+            setupFavoriteButton()
         }
     }
     private let nextButton = UIButton(systemName: "chevron.right.2",
-                                      tintColor: UIColor.titleColor())
+                                      tintColor: UIColor.titleColor(),isSetUpImage: false)
     private let previousButton = UIButton(systemName: "chevron.left.2",
-                                          tintColor: UIColor.titleColor())
-
+                                          tintColor: UIColor.titleColor(),isSetUpImage: false)
     private let favoriteButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "suit.heart.fill")
@@ -24,10 +25,13 @@ final class DetailCharacterVC: UIViewController {
         button.contentMode = .scaleToFill
         return button
     }()
-    private let descriptionLabel = UILabel(color: .white, font: 25)
+    private let charactersCountLabel = UILabel(color: UIColor.titleColor(),
+                                               font: 35, lines: 1,
+                                               weight: .regular)
+    private let descriptionLabel = UILabel(color: .white, font: 35)
     private let characterImage = UIImageView(contentMode: .scaleAspectFill,
-                                          cornerRadius: 20)
-
+                                             cornerRadius: 20)
+    
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -35,7 +39,6 @@ final class DetailCharacterVC: UIViewController {
         setupNavigationBar(name: title ?? "",
                            action: #selector(didTapBackButton))
         setupView()
-        setupFavoriteButton()
         buttonActions()
     }
     
@@ -44,18 +47,19 @@ final class DetailCharacterVC: UIViewController {
     private func setupView() {
         view.backgroundColor = UIColor.backgroundColor()
         [characterImage,favoriteButton,
-         descriptionLabel, nextButton, previousButton].forEach(view.addSubview(_:))
+         descriptionLabel, nextButton, previousButton,
+        charactersCountLabel].forEach(view.addSubview(_:))
         setupConstraints()
     }
     
     private func setupConstraints() {
         characterImage.constraint(top: view.safeAreaLayoutGuide.topAnchor,
-                               left: view.leftAnchor,
-                               right: view.rightAnchor,
-                               topConstant: 20,
-                               leftConstant: 18,
-                               rightConstant: 18,
-                               heightConstant: view.bounds.height / 2.5)
+                                  left: view.leftAnchor,
+                                  right: view.rightAnchor,
+                                  topConstant: 20,
+                                  leftConstant: 18,
+                                  rightConstant: 18,
+                                  heightConstant: view.bounds.height / 2.5)
         
         favoriteButton.constraint(top: characterImage.bottomAnchor,
                                   right: view.rightAnchor,
@@ -71,6 +75,8 @@ final class DetailCharacterVC: UIViewController {
                                     leftConstant: 20, bottomConstant: 20,
                                     rightConstant: 20)
         
+        
+        
         let widthSize = view.frame.size.width / 4
         let height = view.frame.size.height / 10
         nextButton.constraint(right: view.rightAnchor,
@@ -83,6 +89,9 @@ final class DetailCharacterVC: UIViewController {
                                   bottomConstant: 20,
                                   widthConstant: widthSize,
                                   heightConstant: height )
+        charactersCountLabel.constraint(left: previousButton.rightAnchor, right: nextButton.leftAnchor,
+                                        bottom: view.bottomAnchor,
+                                        leftConstant: 8, bottomConstant: 20, rightConstant: 8, heightConstant: height)
     }
     
     private func buttonActions() {
@@ -92,6 +101,9 @@ final class DetailCharacterVC: UIViewController {
         previousButton.addTarget(self,
                                  action: #selector(didTapPreviousButton),
                                  for: .touchUpInside)
+        favoriteButton.addTarget(self,
+                                 action: #selector(didTapFavoriteButton),
+                                 for: .touchUpInside)
     }
     
     private func setupFavoriteButton() {
@@ -100,19 +112,28 @@ final class DetailCharacterVC: UIViewController {
         viewModel.isFavorite.bind { [ unowned self ] (isFavorite) in
             setStatusForFavoriteButton(with: isFavorite)
         }
-        favoriteButton.addTarget(self,
-                                 action: #selector(didTapFavoriteButton),
-                                 for: .touchUpInside)
     }
     
     private func setStatusForFavoriteButton(with status: Bool) {
         favoriteButton.tintColor = status ? .red : .white
+        setDescriptionLabelColor()
+    }
+    
+    private func setDescriptionLabelColor() {
+        switch favoriteButton.tintColor {
+        case UIColor.red:
+            descriptionLabel.textColor = .systemPink
+        case UIColor.white:
+            descriptionLabel.textColor = .white
+        default:
+            break
+        }
     }
     
     @objc private func didTapFavoriteButton() {
         viewModel.favoriteButtonPressed()
     }
-
+    
     @objc private func didTapNextButton() {
         if viewModel.index < viewModel.characters.count - 1 {
             viewModel = DetailCharacterViewModel(characters: viewModel.characters,

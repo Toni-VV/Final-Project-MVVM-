@@ -4,11 +4,14 @@ extension UIButton {
     
     convenience init(systemName: String = "circle.fill",
                      tintColor: UIColor,
-                     tag: Int = 0) {
+                     tag: Int = 0,
+                     isSetUpImage: Bool = true) {
         self.init()
         self.tag = tag
-        let image = UIImage(systemName: systemName)
-        self.setImage(image, for: .normal)
+        if isSetUpImage {
+            let image = UIImage(systemName: systemName)
+            self.setImage(image, for: .normal)
+        }
         self.setBackgroundImage(UIImage(systemName: systemName), for: .normal)
         self.contentMode = .scaleAspectFit
         self.tintColor = tintColor

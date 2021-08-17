@@ -30,8 +30,6 @@ struct Character: Decodable {
         Status:   \(status)
         Species:   \(species)
         Gender:   \(gender)
-        Origin:   \(origin.name)
-        Location:   \(location.name)
         """
         }
 }
@@ -39,3 +37,5 @@ struct Character: Decodable {
 struct Location: Decodable {
     let name: String
 }
+//Origin:   \(origin.name)
+//Location:   \(location.name)
