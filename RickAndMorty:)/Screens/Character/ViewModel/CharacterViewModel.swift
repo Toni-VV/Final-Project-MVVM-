@@ -44,7 +44,7 @@ final class CharacterViewModel: CharacterViewModelProtocol {
                         completion()
                 }
             case .failure(let error):
-                print("Network fetch data error", error.localizedDescription)
+                print("Network fetch charactes error", error.localizedDescription)
             }
         }
     }
@@ -63,7 +63,6 @@ final class CharacterViewModel: CharacterViewModelProtocol {
         return DetailCharacterViewModel(characters: characters, index: index.row)
     }
     func filteredDetailViewModel(index: IndexPath) -> DetailCharacterViewModelProtocol {
-
         return DetailCharacterViewModel(characters: filterCharachter, index: index.row)
     }
 }

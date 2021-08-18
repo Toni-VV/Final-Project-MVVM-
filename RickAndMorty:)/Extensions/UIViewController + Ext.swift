@@ -8,18 +8,27 @@ extension UIViewController {
                             titleColor: UIColor = UIColor.titleColor(),
                             largeTitleColor: UIColor = UIColor.titleColor(),
                             backButton: Bool = true,
-                            action: Selector? = nil
-                            ) {
+                            forwardButton: Bool = false,
+                            backAction: Selector? = nil,
+                            forwardAction: Selector? = nil) {
         title = name
         if backButton {
             navigationController?.navigationBar.barTintColor = UIColor.titleColor()
             let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
                                          style: .plain,
                                          target: self,
-                                         action: (action))
+                                         action: (backAction))
             backButton.tintColor = UIColor.titleColor()
             navigationItem.setLeftBarButton(backButton,
                                             animated: true)
+        }
+        if forwardButton {
+            let episodeButton = UIBarButtonItem(title: "Episodes",
+                                                style: .plain,
+                                                target: self,
+                                                action: forwardAction)
+            episodeButton.tintColor = .white
+            navigationItem.setRightBarButton(episodeButton, animated: true)
         }
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()

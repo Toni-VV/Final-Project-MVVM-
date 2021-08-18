@@ -28,7 +28,10 @@ final class MainViewController: UIViewController {
     
     private func setupTableView() {
         view.addSubview(tableView)
-        tableView.frame = view.bounds
+        tableView.constraint(top: view.safeAreaLayoutGuide.topAnchor,
+                             left: view.leftAnchor,
+                             right: view.rightAnchor,
+                             bottom: view.bottomAnchor)
         let cellHeight = (view.bounds.height) / 3.5
         tableView.rowHeight = cellHeight
         tableView.delegate = self

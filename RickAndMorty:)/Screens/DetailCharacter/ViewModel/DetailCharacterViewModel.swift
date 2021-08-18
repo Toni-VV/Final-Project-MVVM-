@@ -7,6 +7,7 @@ protocol DetailCharacterViewModelProtocol {
     var characterImageData: Data { get }
     var index: Int { get set }
     var characters: [Character] { get }
+    func episodesViewModel(index: Int) -> EpisodeCharacterViewModelProtocol
     
     init(characters: [Character], index: Int)
     func favoriteButtonPressed()
@@ -47,4 +48,10 @@ final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
         DataManager.shared.setFavoriteStatus(for: character.url,
                                              with: isFavorite.value)
     }
+    func episodesViewModel(index: Int) -> EpisodeCharacterViewModelProtocol {
+        let character = characters[index]
+        return EpisodeCharacterViewModel(character: character)
+    }
+    
+
 }

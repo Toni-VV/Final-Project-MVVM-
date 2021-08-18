@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4783E16926C77ADA00A418D6 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4783E16826C77ADA00A418D6 /* APIClient.swift */; };
 		4783E17226C7BB4A00A418D6 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4783E17126C7BB4A00A418D6 /* ErrorViewController.swift */; };
+		4783E1EC26CC52CA00A418D6 /* EpisodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4783E1EB26CC52CA00A418D6 /* EpisodesViewController.swift */; };
+		4783E1F226CC558C00A418D6 /* EpisodeCharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4783E1F126CC558C00A418D6 /* EpisodeCharacterViewModel.swift */; };
 		47D1624B26C16E7F00D82105 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D1624A26C16E7F00D82105 /* AppDelegate.swift */; };
 		47D1624D26C16E7F00D82105 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D1624C26C16E7F00D82105 /* SceneDelegate.swift */; };
 		47D1624F26C16E7F00D82105 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D1624E26C16E7F00D82105 /* MainViewController.swift */; };
@@ -43,6 +45,8 @@
 /* Begin PBXFileReference section */
 		4783E16826C77ADA00A418D6 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		4783E17126C7BB4A00A418D6 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		4783E1EB26CC52CA00A418D6 /* EpisodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesViewController.swift; sourceTree = "<group>"; };
+		4783E1F126CC558C00A418D6 /* EpisodeCharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCharacterViewModel.swift; sourceTree = "<group>"; };
 		47D1624726C16E7F00D82105 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47D1624A26C16E7F00D82105 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47D1624C26C16E7F00D82105 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,15 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		4783E1EE26CC52D000A418D6 /* Episode */ = {
+			isa = PBXGroup;
+			children = (
+				4783E1EB26CC52CA00A418D6 /* EpisodesViewController.swift */,
+				4783E1F126CC558C00A418D6 /* EpisodeCharacterViewModel.swift */,
+			);
+			path = Episode;
+			sourceTree = "<group>";
+		};
 		47D1623E26C16E7F00D82105 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +129,7 @@
 			children = (
 				47D1626026C16EBB00D82105 /* AppFiles */,
 				47D1628B26C18ED400D82105 /* Screens */,
+				4783E1E426C814E800A418D6 /* Error */,
 				47D1627426C1820E00D82105 /* NetworkServices */,
 				47D1626426C1738C00D82105 /* Extensions */,
 			);
@@ -178,7 +192,7 @@
 				47D1629426C1C70400D82105 /* Character */,
 				47D162D326C2F93900D82105 /* Filter */,
 				47D162BD26C2D32700D82105 /* DetailCharacter */,
-				4783E1E426C814E800A418D6 /* Error */,
+				4783E1EE26CC52D000A418D6 /* Episode */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -347,6 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4783E1EC26CC52CA00A418D6 /* EpisodesViewController.swift in Sources */,
 				47D1624F26C16E7F00D82105 /* MainViewController.swift in Sources */,
 				47D162AD26C284BF00D82105 /* CharacterViewModelCell.swift in Sources */,
 				47D1627226C1748500D82105 /* UILabel + Ext.swift in Sources */,
@@ -374,6 +389,7 @@
 				47D162AA26C284AC00D82105 /* CharacterCell.swift in Sources */,
 				47D1626E26C1740B00D82105 /* UIViewController + Ext.swift in Sources */,
 				47D1627C26C1835800D82105 /* UIButton + Ext.swift in Sources */,
+				4783E1F226CC558C00A418D6 /* EpisodeCharacterViewModel.swift in Sources */,
 				47D1626726C173DA00D82105 /* StackView + Extension.swift in Sources */,
 				47D1627926C182F800D82105 /* UIColor+.swift in Sources */,
 			);

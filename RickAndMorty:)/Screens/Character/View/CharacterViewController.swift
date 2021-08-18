@@ -53,7 +53,7 @@ final class CharacterViewController: UIViewController {
     
     private func setupNavigationBar() {
         setupNavigationBar(name: "Characters",
-                           action: #selector(didTapBackButton))
+                           backAction: #selector(didTapBackButton))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-filter-51"),
                                                             style: .plain,
                                                             target: self,
@@ -63,7 +63,10 @@ final class CharacterViewController: UIViewController {
 
     private func setupCollectionView() {
         view.addSubview(collectionView)
-        collectionView.frame = view.bounds
+        collectionView.constraint(top: view.safeAreaLayoutGuide.topAnchor,
+                             left: view.leftAnchor,
+                             right: view.rightAnchor,
+                             bottom: view.bottomAnchor)
         collectionView.backgroundColor = UIColor.backgroundColor()
         collectionView.delegate = self
         collectionView.dataSource = self

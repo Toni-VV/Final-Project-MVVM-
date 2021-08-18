@@ -3,6 +3,8 @@ import Foundation
 protocol NetworkDataFetcherProtocol {
     func fetchCharacter(urlString: String,
                         completion: @escaping (Result<RickyAndMorty, APIError>) -> Void)
+    func fetchEpisodes(urlString: String,
+                        completion: @escaping (Result<Episode, APIError>) -> Void)
 }
 
 struct NetworkDataFetcher: NetworkDataFetcherProtocol {
@@ -47,6 +49,13 @@ struct NetworkDataFetcher: NetworkDataFetcherProtocol {
     
     func fetchCharacter(urlString: String,
                         completion: @escaping (Result<RickyAndMorty, APIError>) -> Void) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.fetchGenericJsonData(urlString: urlString, completion: completion)
+        }
+    }
+    
+    func fetchEpisodes(urlString: String,
+                        completion: @escaping (Result<Episode, APIError>) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
             self.fetchGenericJsonData(urlString: urlString, completion: completion)
         }

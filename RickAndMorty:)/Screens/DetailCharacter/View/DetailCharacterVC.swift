@@ -6,10 +6,10 @@ final class DetailCharacterVC: UIViewController {
     
     var viewModel: DetailCharacterViewModelProtocol! {
         didSet {
-            title = viewModel.title
             characterImage.image = UIImage(data: viewModel.characterImageData)
             descriptionLabel.text = viewModel.description
             charactersCountLabel.text = "\(viewModel.index + 1) of \(viewModel.characters.count)"
+            title = viewModel.title
             setupFavoriteButton()
         }
     }
@@ -36,14 +36,17 @@ final class DetailCharacterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar(name: title ?? "",
-                           action: #selector(didTapBackButton))
+        setupNavigationBar(name: viewModel.title,
+                           backButton: true,
+                           forwardButton: true,
+                           backAction: #selector(didTapBackButton),
+                           forwardAction: #selector(didTapEpisodesButton))
         setupView()
         buttonActions()
     }
     
     //MARK: - Actions
-    
+
     private func setupView() {
         view.backgroundColor = UIColor.backgroundColor()
         [characterImage,favoriteButton,
@@ -133,6 +136,13 @@ final class DetailCharacterVC: UIViewController {
     @objc private func didTapFavoriteButton() {
         viewModel.favoriteButtonPressed()
     }
+    
+    @objc private func didTapEpisodesButton() {
+        let vc = EpisodesViewController()
+        vc.viewModel = viewModel.episodesViewModel(index: viewModel.index)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     @objc private func didTapNextButton() {
         if viewModel.index < viewModel.characters.count - 1 {

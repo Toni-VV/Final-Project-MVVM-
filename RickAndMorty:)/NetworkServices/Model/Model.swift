@@ -39,3 +39,24 @@ struct Location: Decodable {
 }
 //Origin:   \(origin.name)
 //Location:   \(location.name)
+
+struct Episode: Decodable {
+    let name: String
+    let date: String
+    let episode: String
+    let characters: [String]
+    
+    var description: String {
+        """
+    Title: \(name)
+    Date: \(date)
+    """
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case date = "air_date"
+        case episode = "episode"
+        case characters = "characters"
+    }
+}

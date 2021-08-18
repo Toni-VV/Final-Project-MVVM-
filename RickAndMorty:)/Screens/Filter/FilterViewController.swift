@@ -48,7 +48,7 @@ final class FilterViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.backgroundColor()
         setupNavigationBar(name: "Filter",
-                           action: #selector(didTapBackButton))
+                           backAction: #selector(didTapBackButton))
         setupView()
         buttonsActions()
     }
