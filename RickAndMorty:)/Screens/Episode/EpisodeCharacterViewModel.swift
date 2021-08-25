@@ -3,13 +3,16 @@ import Foundation
 protocol EpisodeCharacterViewModelProtocol {
     var episodes: [Episode] { get set }
     var numberOfRows: Int { get }
+    
     func fetchData(urlString: String, completion: @escaping (Episode) -> Void)
     func episodeUrl(index: Int) -> String
+    func episodeDetailViewModel(index: Int) -> EpisodeDetailViewModelProtocol
 }
 
 final class EpisodeCharacterViewModel: EpisodeCharacterViewModelProtocol {
-    
+
     var episodes: [Episode] = []
+    
     var numberOfRows: Int {
         character.episode.count
     }
@@ -22,7 +25,7 @@ final class EpisodeCharacterViewModel: EpisodeCharacterViewModelProtocol {
     }
     
     func fetchData(urlString: String, completion: @escaping (Episode) -> Void) {
-        networkDataFetcher.fetchEpisodes(urlString: urlString) { (result) in
+        networkDataFetcher.fetchEpisode(urlString: urlString) { (result) in
             switch result {
             case .success(let episode):
                 completion(episode)
@@ -36,4 +39,11 @@ final class EpisodeCharacterViewModel: EpisodeCharacterViewModelProtocol {
         let urlString = character.episode[index]
         return urlString
     }
+    
+    func episodeDetailViewModel(index: Int) -> EpisodeDetailViewModelProtocol {
+        let episode = episodes[index]
+        return EpisodeDetailViewModel(episode: episode)
+    }
+    
+    
 }

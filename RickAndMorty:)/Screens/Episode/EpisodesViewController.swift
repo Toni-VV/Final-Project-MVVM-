@@ -60,7 +60,7 @@ extension EpisodesViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let urlString = viewModel.episodeUrl(index: indexPath.row)
         viewModel.fetchData(urlString: urlString) { [weak self] (episode) in
-            let text = "\(indexPath.row + 1).)   \(episode.name)"
+            let text = "\(indexPath.row + 1):   \(episode.name)"
             self?.configureCell(cell: cell, text: text)
             self?.viewModel.episodes.append(episode)
         }
@@ -70,9 +70,15 @@ extension EpisodesViewController: UITableViewDataSource, UITableViewDelegate {
     private func configureCell(cell: UITableViewCell, text: String) {
         cell.textLabel?.text = text
         cell.textLabel?.textColor = .systemTeal
-        cell.textLabel?.font = UIFont(name: "Copperplate-Bold", size: 20)
-//        cell.textLabel?.adjustsFontSizeToFitWidth = true
+        cell.textLabel?.font = UIFont(name: "Copperplate-Bold", size: 18)
         cell.backgroundColor = UIColor.backgroundColor()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let vc = EpisodeDetailVC()
+        vc.viewModel = viewModel.episodeDetailViewModel(index: indexPath.row)
+        present(vc, animated: true)
     }
 }
 

@@ -48,8 +48,9 @@ struct Episode: Decodable {
     
     var description: String {
         """
-    Title: \(name)
-    Date: \(date)
+    Episode:  \(name)
+
+    Date:  \(date)
     """
     }
     

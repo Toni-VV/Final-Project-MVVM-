@@ -34,7 +34,7 @@ final class CharacterViewModel: CharacterViewModelProtocol {
     }
     
     func fetchData(urlString: String, completion: @escaping () -> Void) {
-        networkDataFetcher.fetchCharacter(urlString: urlString) { (result) in
+        networkDataFetcher.fetchData(urlString: urlString) { (result) in
             switch result {
             case .success(let rickAndMorty):
                 self.rickAndMorty = rickAndMorty

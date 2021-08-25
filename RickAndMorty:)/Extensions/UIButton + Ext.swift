@@ -19,11 +19,11 @@ extension UIButton {
     }
     
     convenience init(text: String,
-                     color: UIColor,
+                     color: UIColor = UIColor.titleColor(),
                      aligment: UIControl.ContentHorizontalAlignment = .center,
-                     borderColor: CGColor,
+                     borderColor: CGColor = UIColor.titleColor().cgColor,
                      font: CGFloat,
-                     borderWidth: CGFloat,
+                     borderWidth: CGFloat = 1,
                      cornerRadius: CGFloat) {
         self.init()
         self.setTitleColor(color, for: .normal)

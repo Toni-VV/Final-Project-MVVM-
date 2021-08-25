@@ -1,10 +1,12 @@
 import Foundation
 
 protocol NetworkDataFetcherProtocol {
-    func fetchCharacter(urlString: String,
+    func fetchData(urlString: String,
                         completion: @escaping (Result<RickyAndMorty, APIError>) -> Void)
-    func fetchEpisodes(urlString: String,
+    func fetchEpisode(urlString: String,
                         completion: @escaping (Result<Episode, APIError>) -> Void)
+    func fetchCharacter(urlString: String,
+                        completion: @escaping (Result<Character, APIError>) -> Void)
 }
 
 struct NetworkDataFetcher: NetworkDataFetcherProtocol {
@@ -47,17 +49,24 @@ struct NetworkDataFetcher: NetworkDataFetcherProtocol {
         }
     }
     
-    func fetchCharacter(urlString: String,
+    func fetchData(urlString: String,
                         completion: @escaping (Result<RickyAndMorty, APIError>) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
             self.fetchGenericJsonData(urlString: urlString, completion: completion)
         }
     }
     
-    func fetchEpisodes(urlString: String,
+    func fetchEpisode(urlString: String,
                         completion: @escaping (Result<Episode, APIError>) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
             self.fetchGenericJsonData(urlString: urlString, completion: completion)
         }
     }
+    func fetchCharacter(urlString: String,
+                        completion: @escaping (Result<Character, APIError>) -> Void) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.fetchGenericJsonData(urlString: urlString, completion: completion)
+        }
+    }
+    
 }
