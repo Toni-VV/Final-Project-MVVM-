@@ -24,7 +24,7 @@ extension UILabel {
                      lines: Int = 0) {
         self.init()
         self.textColor = color
-        let font = UIFont(name: "Noteworthy-Light", size: font)
+        let font = UIFont(name: "AppleSDGothicNeo-Bold", size: font)
         self.font = font
         self.textAlignment = .left
         self.adjustsFontSizeToFitWidth = true

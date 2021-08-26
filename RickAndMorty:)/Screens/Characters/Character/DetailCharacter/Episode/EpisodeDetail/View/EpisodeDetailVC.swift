@@ -79,6 +79,7 @@ final class EpisodeDetailVC : UIViewController {
                              topConstant: 18)
     }
     
+    
     private func setCharacters() {
         viewModel.setCharacters()
     }
@@ -107,6 +108,8 @@ extension EpisodeDetailVC: UITableViewDataSource, UITableViewDelegate {
             DispatchQueue.main.async {
                 self?.configure(cell: cell, character: character)
             }
+//            self?.viewModel.characters.append(character)
+//            print("Here:    \(String(describing: self?.viewModel.characters.count))")
         }
         return cell
     }
@@ -125,5 +128,15 @@ extension EpisodeDetailVC: UITableViewDataSource, UITableViewDelegate {
         cell.imageView?.layer.cornerRadius = cell.bounds.height / 2
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+ 
+        let vc = EpisodeCharacterDetailVC()
+        vc.viewModel = viewModel.detailEpisodeCharacter(index: indexPath)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    
+    }
+
 }
 

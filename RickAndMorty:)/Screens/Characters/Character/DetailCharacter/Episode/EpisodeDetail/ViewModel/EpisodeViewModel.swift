@@ -4,9 +4,10 @@ protocol EpisodeDetailViewModelProtocol {
     var description: String { get }
     var numberOfRows: Int { get }
     var characterUrlStrings: [String]  { get }
-    var characters: [Character] { get }
+    var characters: [Character] { get set }
     init(episode: Episode)
     func fetchData(urlString: String, completion: @escaping (Character) -> Void)
+    func detailEpisodeCharacter(index: IndexPath) -> EpisodeCharacterDetailProtocol
     func setCharacters()
 }
 
@@ -25,7 +26,13 @@ final class EpisodeDetailViewModel: EpisodeDetailViewModelProtocol {
         episode.characters
     }
     
-    var characters: [Character] = []
+    var characters: [Character] = [] {
+        didSet {
+            if characters.count == episode.characters.count {
+                characters = characters.sorted { $0.id < $1.id }
+            }
+        }
+    }
     
     private let episode: Episode
     private var networkDataFetcher: NetworkDataFetcherProtocol = NetworkDataFetcher()
@@ -57,4 +64,11 @@ final class EpisodeDetailViewModel: EpisodeDetailViewModelProtocol {
             }
         }
     }
+    
+    func detailEpisodeCharacter(index: IndexPath) -> EpisodeCharacterDetailProtocol {
+        let character = characters[index.row]
+        return EpisodeCharacterDetailViewModel(character: character)
+    }
+    
+    
 }
