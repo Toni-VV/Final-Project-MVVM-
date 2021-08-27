@@ -11,45 +11,55 @@ final class EpisodeDetailVC : UIViewController {
         }
     }
     
-    private let tableView: UITableView = {
-        let table = UITableView()
-        table.backgroundColor = UIColor.backgroundColor()
-        table.register(UITableViewCell.self,
-                       forCellReuseIdentifier: "Cell2")
-        return table
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let spacing = CGFloat(10)
+        let cellsPerLine = CGFloat(2)
+        layout.sectionInset = UIEdgeInsets(top: spacing,
+                                           left: spacing,
+                                           bottom: spacing,
+                                           right: spacing)
+        let cellSize = (view.bounds.width - (spacing * 3)) / cellsPerLine
+        layout.itemSize = CGSize(width: cellSize,
+                                 height: cellSize)
+        let collectionView = UICollectionView(frame: .zero,
+                                              collectionViewLayout: layout)
+        collectionView.register(EpisodeDetailCell.self,
+                                forCellWithReuseIdentifier: EpisodeDetailCell.identifier)
+        return collectionView
     }()
-    private let descriptionLabel = UILabel(color: .systemTeal,
+
+    private let descriptionLabel = UILabel(color: .systemBlue,
                                            font: 25,
                                            lines: 0,
                                            weight: .semibold,
-                                           alignment: .left)
+                                           alignment: .center)
     private let episodeCharacterButton = UIButton(text: "Characters in episode",
                                                   font: 25,
                                                   cornerRadius: 20)
+//    private let tapOnButtonLabel = UILabel
     
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.backgroundColor()
-        setupTableView()
+        setupCollectionView()
         setCharacters()
+        setupConstraints()
         episodeCharacterButton.addTarget(self,
                                          action: #selector(didTapEpisodeCharacterButton),
                                          for: .touchUpInside)
     }
     
     //MARK: - Actions
-    
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.isHidden = true
-        tableView.backgroundColor = UIColor.backgroundColor()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = view.frame.size.height / 5
-        
-        setupConstraints()
+ 
+    private func setupCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.isHidden = true
+        collectionView.backgroundColor = UIColor.backgroundColor()
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     private func setupConstraints() {
@@ -72,7 +82,7 @@ final class EpisodeDetailVC : UIViewController {
                                           rightConstant: 18,
                                           heightConstant: height)
         
-        tableView.constraint(top: episodeCharacterButton.bottomAnchor,
+        collectionView.constraint(top: episodeCharacterButton.bottomAnchor,
                              left: view.leftAnchor,
                              right: view.rightAnchor,
                              bottom: view.bottomAnchor,
@@ -85,7 +95,7 @@ final class EpisodeDetailVC : UIViewController {
     }
     
     @objc private func didTapEpisodeCharacterButton() {
-            self.tableView.isHidden = false
+            self.collectionView.isHidden = false
     }
     
     @objc private func didTapBackButton() {
@@ -93,50 +103,30 @@ final class EpisodeDetailVC : UIViewController {
     }
 }
 
-//MARK: - Extensions
+//MARK: - UICollectionView Extensions
 
-extension EpisodeDetailVC: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension EpisodeDetailVC: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.numberOfRows
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2",
-                                                 for: indexPath)
-        let urlString = viewModel.characterUrlStrings[indexPath.row]
-        viewModel.fetchData(urlString: urlString) { [weak self] (character) in
-            DispatchQueue.main.async {
-                self?.configure(cell: cell, character: character)
-            }
-//            self?.viewModel.characters.append(character)
-//            print("Here:    \(String(describing: self?.viewModel.characters.count))")
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeDetailCell.identifier, for: indexPath) as! EpisodeDetailCell
+        let characterUrlString = viewModel.characterUrlStrings[indexPath.row]
+        viewModel.fetchData(urlString: characterUrlString) { (character) in
+            cell.viewModel = EpisodeDetailCellViewModel(character: character)
         }
         return cell
     }
     
-    
-    
-    private func configure(cell: UITableViewCell, character: Character) {
-        cell.textLabel?.text = character.name
-        cell.textLabel?.textColor = UIColor.titleColor()
-        cell.backgroundColor = UIColor.backgroundColor()
-        let url = URL(string: character.image)
-        guard
-            let imageData = ImageManager.shared.fetchImage(url: url)
-        else { return }
-        cell.imageView?.image = UIImage(data: imageData)
-        cell.imageView?.layer.cornerRadius = cell.bounds.height / 2
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
- 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         let vc = EpisodeCharacterDetailVC()
         vc.viewModel = viewModel.detailEpisodeCharacter(index: indexPath)
-        vc.modalPresentationStyle = .formSheet
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .automatic
         present(vc, animated: true)
-    
     }
-
+    
+    
 }
-

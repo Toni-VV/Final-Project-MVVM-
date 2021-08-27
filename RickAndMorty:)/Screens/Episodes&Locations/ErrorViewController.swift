@@ -15,7 +15,7 @@ class ErrorVieController: UIViewController {
                               There nothing there!
                               """, color: UIColor.titleColor(), font: 35,
                                 lines: 0, weight: .heavy, alignment: .center)
-                                
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.backgroundColor()
@@ -23,23 +23,17 @@ class ErrorVieController: UIViewController {
     }
     
     private func setupVieew() {
-        [image,label].forEach { view.addSubview($0)}
-        
+        [image,label].forEach { view.addSubview($0) }
         image.contentMode = .scaleAspectFit
-        
-       setupConstraints()
+        setupConstraints()
     }
     
-  private func setupConstraints() {
-    image.constraint(top: view.topAnchor,
-                     left: view.leftAnchor,
-                     right: view.rightAnchor,
-                     bottom: label.topAnchor,
-                     topConstant: 0,
-                     leftConstant: 0,
-                     bottomConstant: 0,
-                     rightConstant: 0)
-    
+    private func setupConstraints() {
+        image.constraint(top: view.topAnchor,
+                         left: view.leftAnchor,
+                         right: view.rightAnchor,
+                         bottom: label.topAnchor)
+        
         label.constraint(left: view.leftAnchor,
                          right: view.rightAnchor,
                          bottom: view.bottomAnchor,

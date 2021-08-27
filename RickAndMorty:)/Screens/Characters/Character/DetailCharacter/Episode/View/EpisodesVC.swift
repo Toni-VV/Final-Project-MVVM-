@@ -69,7 +69,7 @@ extension EpisodesViewController: UITableViewDataSource, UITableViewDelegate {
     
     private func configureCell(cell: UITableViewCell, text: String) {
         cell.textLabel?.text = text
-        cell.textLabel?.textColor = .systemTeal
+        cell.textLabel?.textColor = .systemBlue
         cell.textLabel?.font = UIFont(name: "Copperplate-Bold", size: 18)
         cell.backgroundColor = UIColor.backgroundColor()
     }

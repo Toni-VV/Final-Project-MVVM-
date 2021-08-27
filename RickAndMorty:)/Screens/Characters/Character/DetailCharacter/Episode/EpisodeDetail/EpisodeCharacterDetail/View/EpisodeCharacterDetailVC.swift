@@ -1,6 +1,6 @@
 import UIKit
 
-class EpisodeCharacterDetailVC: UIViewController {
+final class EpisodeCharacterDetailVC: UIViewController {
     
     var viewModel: EpisodeCharacterDetailProtocol! {
         didSet {

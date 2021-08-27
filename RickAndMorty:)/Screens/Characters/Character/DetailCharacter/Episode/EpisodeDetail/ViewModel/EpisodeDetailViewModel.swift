@@ -5,7 +5,9 @@ protocol EpisodeDetailViewModelProtocol {
     var numberOfRows: Int { get }
     var characterUrlStrings: [String]  { get }
     var characters: [Character] { get set }
+    
     init(episode: Episode)
+    
     func fetchData(urlString: String, completion: @escaping (Character) -> Void)
     func detailEpisodeCharacter(index: IndexPath) -> EpisodeCharacterDetailProtocol
     func setCharacters()
@@ -25,7 +27,7 @@ final class EpisodeDetailViewModel: EpisodeDetailViewModelProtocol {
     var characterUrlStrings: [String] {
         episode.characters
     }
-    
+
     var characters: [Character] = [] {
         didSet {
             if characters.count == episode.characters.count {
@@ -52,6 +54,11 @@ final class EpisodeDetailViewModel: EpisodeDetailViewModelProtocol {
         }
     }
     
+    func detailEpisodeCharacter(index: IndexPath) -> EpisodeCharacterDetailProtocol {
+        let character = characters[index.row]
+        return EpisodeCharacterDetailViewModel(character: character)
+    }
+    
     func setCharacters() {
         characterUrlStrings.forEach {
             networkDataFetcher.fetchCharacter(urlString: $0) { (result) in
@@ -64,11 +71,4 @@ final class EpisodeDetailViewModel: EpisodeDetailViewModelProtocol {
             }
         }
     }
-    
-    func detailEpisodeCharacter(index: IndexPath) -> EpisodeCharacterDetailProtocol {
-        let character = characters[index.row]
-        return EpisodeCharacterDetailViewModel(character: character)
-    }
-    
-    
 }

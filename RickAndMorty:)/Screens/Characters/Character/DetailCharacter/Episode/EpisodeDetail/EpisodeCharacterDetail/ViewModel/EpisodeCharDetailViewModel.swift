@@ -39,7 +39,4 @@ final class EpisodeCharacterDetailViewModel: EpisodeCharacterDetailProtocol {
         DataManager.shared.setFavoriteStatus(for: character.url,
                                              with: isFavorite.value)
     }
-    
-
-
 }
