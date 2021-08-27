@@ -4,7 +4,7 @@ protocol DetailCharacterViewModelProtocol {
     var isFavorite: Box<Bool> { get }
     var title: String { get }
     var description: String { get }
-    var characterImageData: Data { get }
+    var characterImage: String { get }
     var index: Int { get set }
     var characters: [Character] { get }
     func episodesViewModel(index: Int) -> EpisodeCharacterViewModelProtocol
@@ -25,12 +25,8 @@ final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
     var description: String {
         character.description
     }
-    var characterImageData: Data {
-        let url = URL(string: character.image)
-        guard
-            let data = ImageManager.shared.fetchImage(url: url)
-        else { return Data() }
-        return data
+    var characterImage: String {
+        character.image
     }
     
     private let character: Character
@@ -39,13 +35,13 @@ final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
         self.index = index
         self.characters = characters
         self.character = characters[index]
-        self.isFavorite = Box(value: DataManager.shared.getFavoriteStatus(for: character.url))
+        self.isFavorite = Box(value: DataManager.shared.getFavoriteStatus(for: character.name))
         
     }
     
     func favoriteButtonPressed() {
         isFavorite.value.toggle()
-        DataManager.shared.setFavoriteStatus(for: character.url,
+        DataManager.shared.setFavoriteStatus(for: character.name,
                                              with: isFavorite.value)
     }
     func episodesViewModel(index: Int) -> EpisodeCharacterViewModelProtocol {

@@ -4,15 +4,14 @@ final class EpisodeCharacterDetailVC: UIViewController {
     
     var viewModel: EpisodeCharacterDetailProtocol! {
         didSet {
-            characterImage.image = UIImage(data: viewModel.characterImageData)
+            characterImage.fetchImage(from: viewModel.characterImage)
             descriptionLabel.text = viewModel.description
             title = viewModel.title
             setupFavoriteButton()
         }
     }
     
-    private let characterImage = UIImageView(contentMode: .scaleAspectFill,
-                                             cornerRadius: 20)
+    private let characterImage = CharacterImageView()
     private let descriptionLabel = UILabel(color: .white, font: 35)
     private let favoriteButton: UIButton = {
         let button = UIButton()

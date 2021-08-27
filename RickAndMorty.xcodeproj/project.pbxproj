@@ -46,6 +46,7 @@
 		47F90AF426D81B7B006536C8 /* EpisodeCharDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F90AF326D81B7B006536C8 /* EpisodeCharDetailViewModel.swift */; };
 		47F90B0026D83C5D006536C8 /* EpisodeDetailCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F90AFF26D83C5D006536C8 /* EpisodeDetailCellVM.swift */; };
 		47F90B0526D83D48006536C8 /* EpisodeDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F90B0426D83D48006536C8 /* EpisodeDetailCell.swift */; };
+		47F90B1026D96CDE006536C8 /* CharacterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F90B0F26D96CDD006536C8 /* CharacterImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		47F90AF326D81B7B006536C8 /* EpisodeCharDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCharDetailViewModel.swift; sourceTree = "<group>"; };
 		47F90AFF26D83C5D006536C8 /* EpisodeDetailCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailCellVM.swift; sourceTree = "<group>"; };
 		47F90B0426D83D48006536C8 /* EpisodeDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailCell.swift; sourceTree = "<group>"; };
+		47F90B0F26D96CDD006536C8 /* CharacterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,12 +190,10 @@
 		47D1627426C1820E00D82105 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				47D162BB26C299B200D82105 /* Model */,
 				47D162CE26C2D87300D82105 /* DataManager.swift */,
-				47D1627526C1822200D82105 /* ImageManager.swift */,
-				47D1629826C25C4100D82105 /* NetworkService.swift */,
-				47D1629B26C25C5700D82105 /* NetworkDataFetcher.swift */,
-				4783E16826C77ADA00A418D6 /* APIClient.swift */,
+				47D162BB26C299B200D82105 /* Model */,
+				47F90B1326D97734006536C8 /* Networking */,
+				47F90B1526D97750006536C8 /* ImageCache */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -382,6 +382,25 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		47F90B1326D97734006536C8 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				47D1629826C25C4100D82105 /* NetworkService.swift */,
+				47D1629B26C25C5700D82105 /* NetworkDataFetcher.swift */,
+				4783E16826C77ADA00A418D6 /* APIClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		47F90B1526D97750006536C8 /* ImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				47D1627526C1822200D82105 /* ImageManager.swift */,
+				47F90B0F26D96CDD006536C8 /* CharacterImageView.swift */,
+			);
+			path = ImageCache;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -479,6 +498,7 @@
 				47F90B0526D83D48006536C8 /* EpisodeDetailCell.swift in Sources */,
 				47D1629926C25C4100D82105 /* NetworkService.swift in Sources */,
 				47D1624D26C16E7F00D82105 /* SceneDelegate.swift in Sources */,
+				47F90B1026D96CDE006536C8 /* CharacterImageView.swift in Sources */,
 				47D162D526C2F95400D82105 /* FilterViewController.swift in Sources */,
 				47D162AA26C284AC00D82105 /* CharacterCell.swift in Sources */,
 				47D1626E26C1740B00D82105 /* UIViewController + Ext.swift in Sources */,

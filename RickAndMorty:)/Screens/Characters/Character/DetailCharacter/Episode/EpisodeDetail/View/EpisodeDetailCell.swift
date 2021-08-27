@@ -11,13 +11,12 @@ final class EpisodeDetailCell: UICollectionViewCell {
     
     var viewModel: EpisodeDetailCellProtocol! {
         didSet {
-            characterImage.image = UIImage(data: viewModel.image)
+            characterImage.fetchImage(from: viewModel.image)
             nameLabel.text = viewModel.name
         }
     }
     
-    private let characterImage = UIImageView(contentMode: .scaleAspectFill,
-                                             cornerRadius: 20)
+    private let characterImage = CharacterImageView()
     private let nameLabel = UILabel(color: .black,
                                     font: 20, lines: 1,
                                     weight: .regular,

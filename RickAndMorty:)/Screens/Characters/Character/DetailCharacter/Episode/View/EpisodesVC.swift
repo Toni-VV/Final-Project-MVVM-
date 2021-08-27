@@ -78,6 +78,7 @@ extension EpisodesViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = EpisodeDetailVC()
         vc.viewModel = viewModel.episodeDetailViewModel(index: indexPath.row)
+        vc.modalTransitionStyle = .coverVertical
         present(vc, animated: true)
     }
 }

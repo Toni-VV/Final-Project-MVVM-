@@ -28,7 +28,11 @@ final class EpisodeDetailVC : UIViewController {
                                 forCellWithReuseIdentifier: EpisodeDetailCell.identifier)
         return collectionView
     }()
-
+    private let pleaseTapButton = UILabel(text: "Please tap button for open characters...",
+                                          color: .systemRed,
+                                          font: 30,
+                                          lines: 1,
+                                          weight: .regular)
     private let descriptionLabel = UILabel(color: .systemBlue,
                                            font: 25,
                                            lines: 0,
@@ -37,7 +41,7 @@ final class EpisodeDetailVC : UIViewController {
     private let episodeCharacterButton = UIButton(text: "Characters in episode",
                                                   font: 25,
                                                   cornerRadius: 20)
-//    private let tapOnButtonLabel = UILabel
+    //    private let tapOnButtonLabel = UILabel
     
     //MARK: - Life Cycle
     
@@ -53,7 +57,7 @@ final class EpisodeDetailVC : UIViewController {
     }
     
     //MARK: - Actions
- 
+    
     private func setupCollectionView() {
         view.addSubview(collectionView)
         collectionView.isHidden = true
@@ -65,6 +69,7 @@ final class EpisodeDetailVC : UIViewController {
     private func setupConstraints() {
         view.addSubview(descriptionLabel)
         view.addSubview(episodeCharacterButton)
+        view.addSubview(pleaseTapButton)
         let height = view.bounds.height / 10
         
         descriptionLabel.constraint(top: view.safeAreaLayoutGuide.topAnchor,
@@ -81,12 +86,18 @@ final class EpisodeDetailVC : UIViewController {
                                           leftConstant: 18,
                                           rightConstant: 18,
                                           heightConstant: height)
+        pleaseTapButton.constraint(top: episodeCharacterButton.bottomAnchor,
+                                   left: view.leftAnchor,
+                                   right: view.rightAnchor,
+                                   leftConstant: 20,
+                                   rightConstant: 20,
+                                   heightConstant: view.bounds.height / 9)
         
         collectionView.constraint(top: episodeCharacterButton.bottomAnchor,
-                             left: view.leftAnchor,
-                             right: view.rightAnchor,
-                             bottom: view.bottomAnchor,
-                             topConstant: 18)
+                                  left: view.leftAnchor,
+                                  right: view.rightAnchor,
+                                  bottom: view.bottomAnchor,
+                                  topConstant: 18)
     }
     
     
@@ -95,7 +106,8 @@ final class EpisodeDetailVC : UIViewController {
     }
     
     @objc private func didTapEpisodeCharacterButton() {
-            self.collectionView.isHidden = false
+        self.collectionView.isHidden = !collectionView.isHidden
+        self.pleaseTapButton.isHidden = !pleaseTapButton.isHidden
     }
     
     @objc private func didTapBackButton() {

@@ -6,7 +6,7 @@ final class DetailCharacterVC: UIViewController {
     
     var viewModel: DetailCharacterViewModelProtocol! {
         didSet {
-            characterImage.image = UIImage(data: viewModel.characterImageData)
+            characterImage.fetchImage(from: viewModel.characterImage )
             descriptionLabel.text = viewModel.description
             charactersCountLabel.text = "\(viewModel.index + 1) of \(viewModel.characters.count)"
             title = viewModel.title
@@ -29,8 +29,7 @@ final class DetailCharacterVC: UIViewController {
                                                font: 35, lines: 1,
                                                weight: .regular)
     private let descriptionLabel = UILabel(color: .white, font: 35)
-    private let characterImage = UIImageView(contentMode: .scaleAspectFill,
-                                             cornerRadius: 20)
+    private let characterImage = CharacterImageView()
     
     //MARK: - Life Cycle
     
