@@ -61,15 +61,17 @@ extension EpisodesViewController: UITableViewDataSource, UITableViewDelegate {
         let urlString = viewModel.episodeUrl(index: indexPath.row)
         viewModel.fetchData(urlString: urlString) { [weak self] (episode) in
             let text = "\(indexPath.row + 1):   \(episode.name)"
-            self?.configureCell(cell: cell, text: text)
             self?.viewModel.episodes.append(episode)
+            DispatchQueue.main.async {
+                self?.configureCell(cell: cell, text: text)
+            }
         }
         return cell
     }
     
     private func configureCell(cell: UITableViewCell, text: String) {
         cell.textLabel?.text = text
-        cell.textLabel?.textColor = .systemBlue
+        cell.textLabel?.textColor = .systemPurple
         cell.textLabel?.font = UIFont(name: "Copperplate-Bold", size: 18)
         cell.backgroundColor = UIColor.backgroundColor()
     }

@@ -13,10 +13,7 @@ final class DetailCharacterVC: UIViewController {
             setupFavoriteButton()
         }
     }
-    private let nextButton = UIButton(systemName: "chevron.right.2",
-                                      tintColor: UIColor.titleColor(),isSetUpImage: false)
-    private let previousButton = UIButton(systemName: "chevron.left.2",
-                                          tintColor: UIColor.titleColor(),isSetUpImage: false)
+    
     private let favoriteButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "suit.heart.fill")
@@ -25,10 +22,18 @@ final class DetailCharacterVC: UIViewController {
         button.contentMode = .scaleToFill
         return button
     }()
+    private let nextButton = UIButton(systemName: "chevron.right.2",
+                                      tintColor: UIColor.titleColor(),
+                                      isSetUpImage: false)
+    private let previousButton = UIButton(systemName: "chevron.left.2",
+                                          tintColor: UIColor.titleColor(),
+                                          isSetUpImage: false)
     private let charactersCountLabel = UILabel(color: UIColor.titleColor(),
-                                               font: 35, lines: 1,
+                                               font: 35,
+                                               lines: 1,
                                                weight: .regular)
-    private let descriptionLabel = UILabel(color: .white, font: 35)
+    private let descriptionLabel = UILabel(color: .white,
+                                           font: 35)
     private let characterImage = CharacterImageView()
     
     //MARK: - Life Cycle
@@ -45,12 +50,12 @@ final class DetailCharacterVC: UIViewController {
     }
     
     //MARK: - Actions
-
+    
     private func setupView() {
         view.backgroundColor = UIColor.backgroundColor()
         [characterImage,favoriteButton,
-         descriptionLabel, nextButton, previousButton,
-        charactersCountLabel].forEach(view.addSubview(_:))
+         descriptionLabel,nextButton,
+         previousButton,charactersCountLabel].forEach(view.addSubview(_:))
         setupConstraints()
     }
     
@@ -141,7 +146,6 @@ final class DetailCharacterVC: UIViewController {
         vc.viewModel = viewModel.episodesViewModel(index: viewModel.index)
         navigationController?.pushViewController(vc, animated: true)
     }
-    
     
     @objc private func didTapNextButton() {
         if viewModel.index < viewModel.characters.count - 1 {

@@ -21,7 +21,8 @@ extension UILabel {
     
     convenience init(color: UIColor = UIColor.titleColor(),
                      font: CGFloat = 25,
-                     lines: Int = 0) {
+                     lines: Int = 0,
+                     alignment: NSTextAlignment = .left ) {
         self.init()
         self.textColor = color
         let font = UIFont(name: "AppleSDGothicNeo-Bold", size: font)

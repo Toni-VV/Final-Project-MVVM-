@@ -29,11 +29,11 @@ final class EpisodeDetailVC : UIViewController {
         return collectionView
     }()
     private let pleaseTapButton = UILabel(text: "Please tap button for open characters...",
-                                          color: .systemRed,
+                                          color: .white,
                                           font: 30,
                                           lines: 1,
                                           weight: .regular)
-    private let descriptionLabel = UILabel(color: .systemBlue,
+    private let descriptionLabel = UILabel(color: .systemPurple,
                                            font: 25,
                                            lines: 0,
                                            weight: .semibold,
@@ -50,10 +50,10 @@ final class EpisodeDetailVC : UIViewController {
         view.backgroundColor = UIColor.backgroundColor()
         setupCollectionView()
         setCharacters()
+        setupView()
         setupConstraints()
-        episodeCharacterButton.addTarget(self,
-                                         action: #selector(didTapEpisodeCharacterButton),
-                                         for: .touchUpInside)
+        buttonActions()
+       
     }
     
     //MARK: - Actions
@@ -66,10 +66,14 @@ final class EpisodeDetailVC : UIViewController {
         collectionView.dataSource = self
     }
     
-    private func setupConstraints() {
+    private func setupView() {
         view.addSubview(descriptionLabel)
         view.addSubview(episodeCharacterButton)
         view.addSubview(pleaseTapButton)
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
         let height = view.bounds.height / 10
         
         descriptionLabel.constraint(top: view.safeAreaLayoutGuide.topAnchor,
@@ -79,6 +83,7 @@ final class EpisodeDetailVC : UIViewController {
                                     leftConstant: 20,
                                     rightConstant: 20,
                                     heightConstant: height)
+        
         episodeCharacterButton.constraint(top: descriptionLabel.bottomAnchor,
                                           left: view.leftAnchor,
                                           right: view.rightAnchor,
@@ -86,6 +91,7 @@ final class EpisodeDetailVC : UIViewController {
                                           leftConstant: 18,
                                           rightConstant: 18,
                                           heightConstant: height)
+        
         pleaseTapButton.constraint(top: episodeCharacterButton.bottomAnchor,
                                    left: view.leftAnchor,
                                    right: view.rightAnchor,
@@ -100,6 +106,11 @@ final class EpisodeDetailVC : UIViewController {
                                   topConstant: 18)
     }
     
+    private func buttonActions() {
+        episodeCharacterButton.addTarget(self,
+                                         action: #selector(didTapEpisodeCharacterButton),
+                                         for: .touchUpInside)
+    }
     
     private func setCharacters() {
         viewModel.setCharacters()
@@ -125,6 +136,7 @@ extension EpisodeDetailVC: UICollectionViewDataSource, UICollectionViewDelegate 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeDetailCell.identifier, for: indexPath) as! EpisodeDetailCell
         let characterUrlString = viewModel.characterUrlStrings[indexPath.row]
+        
         viewModel.fetchData(urlString: characterUrlString) { (character) in
             cell.viewModel = EpisodeDetailCellViewModel(character: character)
         }
@@ -135,6 +147,7 @@ extension EpisodeDetailVC: UICollectionViewDataSource, UICollectionViewDelegate 
         collectionView.deselectItem(at: indexPath, animated: true)
         let vc = EpisodeCharacterDetailVC()
         vc.viewModel = viewModel.detailEpisodeCharacter(index: indexPath)
+        
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .automatic
         present(vc, animated: true)

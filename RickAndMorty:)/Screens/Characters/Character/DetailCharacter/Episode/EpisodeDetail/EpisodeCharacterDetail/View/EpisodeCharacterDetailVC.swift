@@ -12,7 +12,9 @@ final class EpisodeCharacterDetailVC: UIViewController {
     }
     
     private let characterImage = CharacterImageView()
-    private let descriptionLabel = UILabel(color: .white, font: 35)
+    private let descriptionLabel = UILabel(color: .white,
+                                           font: 35,
+                                           alignment: .center)
     private let favoriteButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "suit.heart.fill")
@@ -26,15 +28,12 @@ final class EpisodeCharacterDetailVC: UIViewController {
         super.viewDidLoad()
         setupView()
         setupNavigationBar(name: viewModel.title)
-        favoriteButton.addTarget(self,
-                                 action: #selector(didTapFavoriteButton),
-                                 for: .touchUpInside)
+        buttonActions()
     }
     
     private func setupView() {
         view.backgroundColor = UIColor.backgroundColor()
         [characterImage,descriptionLabel,favoriteButton].forEach(view.addSubview(_:))
-        
         setupConstraints()
     }
     
@@ -46,21 +45,29 @@ final class EpisodeCharacterDetailVC: UIViewController {
                                   leftConstant: 18,
                                   rightConstant: 18,
                                   heightConstant: view.bounds.height / 2.5)
+        
         favoriteButton.constraint(top: characterImage.bottomAnchor,
                                   right: view.rightAnchor,
                                   topConstant: -50,
                                   rightConstant: 10,
                                   widthConstant: 50,
                                   heightConstant: 50)
+        
         descriptionLabel.constraint(top: characterImage.bottomAnchor,
                                     left: view.leftAnchor,
                                     right: view.rightAnchor,
-                                    bottom: view.bottomAnchor,
                                     topConstant: 20,
                                     leftConstant: 20,
-                                    bottomConstant: 20,
                                     rightConstant: 20)
+        
     }
+    
+    private func buttonActions() {
+        favoriteButton.addTarget(self,
+                                 action: #selector(didTapFavoriteButton),
+                                 for: .touchUpInside)
+    }
+    
     private func setupFavoriteButton() {
         setStatusForFavoriteButton(with: viewModel.isFavorite.value)
         
@@ -88,5 +95,4 @@ final class EpisodeCharacterDetailVC: UIViewController {
     @objc private func didTapFavoriteButton() {
         viewModel.favoriteButtonPressed()
     }
-        
 }
