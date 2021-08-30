@@ -29,7 +29,7 @@ final class DetailCharacterVC: UIViewController {
                                           tintColor: UIColor.titleColor(),
                                           isSetUpImage: false)
     private let charactersCountLabel = UILabel(color: UIColor.titleColor(),
-                                               font: 35,
+                                               font: 25,
                                                lines: 1,
                                                weight: .regular)
     private let descriptionLabel = UILabel(color: .white,

@@ -190,7 +190,7 @@
 		47D1627426C1820E00D82105 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				47D162CE26C2D87300D82105 /* DataManager.swift */,
+				47F90B1D26DD1105006536C8 /* UserDefaults */,
 				47D162BB26C299B200D82105 /* Model */,
 				47F90B1326D97734006536C8 /* Networking */,
 				47F90B1526D97750006536C8 /* ImageCache */,
@@ -399,6 +399,14 @@
 				47F90B0F26D96CDD006536C8 /* CharacterImageView.swift */,
 			);
 			path = ImageCache;
+			sourceTree = "<group>";
+		};
+		47F90B1D26DD1105006536C8 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				47D162CE26C2D87300D82105 /* DataManager.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
