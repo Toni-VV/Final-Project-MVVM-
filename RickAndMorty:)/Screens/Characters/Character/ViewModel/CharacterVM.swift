@@ -8,7 +8,7 @@ protocol CharacterViewModelProtocol {
     var filterCharachter: [Character] { get set }
     
     func fetchData(urlString: String, completion: @escaping () -> Void)
-    func viewModelCell(index: IndexPath) -> CharacterViewModelCellProtocol
+    func viewModelCell(index: IndexPath) -> CharacterViewModelCellProtocol?
     func filterViewModelCell(index: IndexPath) -> CharacterViewModelCellProtocol
     func detailViewModel(index: IndexPath) -> DetailCharacterViewModelProtocol
     func filteredDetailViewModel(index: IndexPath) -> DetailCharacterViewModelProtocol
@@ -49,7 +49,8 @@ final class CharacterViewModel: CharacterViewModelProtocol {
         }
     }
 
-    func viewModelCell(index: IndexPath) -> CharacterViewModelCellProtocol {
+    func viewModelCell(index: IndexPath) -> CharacterViewModelCellProtocol? {
+        guard characters.count > 0 else { return nil }
         let characterCell = characters[index.row]
         return CharacterViewModelCell(character: characterCell)
     }

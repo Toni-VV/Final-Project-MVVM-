@@ -6,10 +6,11 @@ final class CharacterCell: UICollectionViewCell {
     
     static let identifier = "CharacterCell"
     
-    var viewModel: CharacterViewModelCellProtocol! {
+    var viewModel: CharacterViewModelCellProtocol? {
         didSet {
-            characterImage.fetchImage(from: viewModel.image)
-            nameLabel.text = viewModel.name
+            guard let model = viewModel else { return }
+            characterImage.fetchImage(from: model.image)
+            nameLabel.text = model.name
         }
     }
     
