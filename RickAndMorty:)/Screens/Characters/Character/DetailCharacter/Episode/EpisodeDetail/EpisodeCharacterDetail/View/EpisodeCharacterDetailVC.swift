@@ -2,19 +2,33 @@ import UIKit
 
 final class EpisodeCharacterDetailVC: UIViewController {
     
+    //MARK: - Properties
+    
     var viewModel: EpisodeCharacterDetailProtocol! {
         didSet {
             characterImage.fetchImage(from: viewModel.characterImage)
-            descriptionLabel.text = viewModel.description
-            title = viewModel.title
+            characterNameLabel.text = "Name:  \(viewModel.name)"
+            characterStatusLabel.text = "Status:  \(viewModel.status)"
+            characterSpeciesLabel.text = "Species:  \(viewModel.species)"
+            characterGenderLabel.text = "Gender:  \(viewModel.gender)"
             setupFavoriteButton()
         }
     }
+    private let tableView: UITableView = {
+        let table = UITableView()
+        table.backgroundColor = UIColor.backgroundColor()
+        table.register(UITableViewCell.self,
+                       forCellReuseIdentifier: "EpisodeCharacterDetail")
+        return table
+    }()
+    
+    private let characterNameLabel = UILabel(alignment: .left)
+    private let characterStatusLabel = UILabel(alignment: .left)
+    private let characterSpeciesLabel = UILabel(alignment: .left)
+    private let characterGenderLabel = UILabel(alignment: .left)
     
     private let characterImage = CharacterImageView()
-    private let descriptionLabel = UILabel(color: .white,
-                                           font: 35,
-                                           alignment: .center)
+    
     private let favoriteButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "suit.heart.fill")
@@ -23,17 +37,41 @@ final class EpisodeCharacterDetailVC: UIViewController {
         button.contentMode = .scaleToFill
         return button
     }()
+    //MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
         setupView()
         setupNavigationBar(name: viewModel.title)
         buttonActions()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupTableViewConstraints()
+    }
+    
+    //MARK: - Actions
+    
+    private func setupTableView() {
+        view.addSubview(tableView)
+        tableView.dataSource = self
+    }
+    
+    private func setupTableViewConstraints() {
+        let cellHeight = (view.bounds.height - characterImage.bounds.height) / 7
+        tableView.rowHeight = cellHeight
+        tableView.constraint(top: characterImage.bottomAnchor,
+                             left: view.leftAnchor,
+                             right: view.rightAnchor,
+                             bottom: view.bottomAnchor,
+                             topConstant: 20)
+    }
+    
     private func setupView() {
         view.backgroundColor = UIColor.backgroundColor()
-        [characterImage,descriptionLabel,favoriteButton].forEach(view.addSubview(_:))
+        [characterImage,favoriteButton].forEach(view.addSubview(_:))
         setupConstraints()
     }
     
@@ -52,14 +90,6 @@ final class EpisodeCharacterDetailVC: UIViewController {
                                   rightConstant: 10,
                                   widthConstant: 50,
                                   heightConstant: 50)
-        
-        descriptionLabel.constraint(top: characterImage.bottomAnchor,
-                                    left: view.leftAnchor,
-                                    right: view.rightAnchor,
-                                    topConstant: 20,
-                                    leftConstant: 20,
-                                    rightConstant: 20)
-        
     }
     
     private func buttonActions() {
@@ -78,21 +108,30 @@ final class EpisodeCharacterDetailVC: UIViewController {
     
     private func setStatusForFavoriteButton(with status: Bool) {
         favoriteButton.tintColor = status ? .red : .white
-        setDescriptionLabelColor()
-    }
-    
-    private func setDescriptionLabelColor() {
-        switch favoriteButton.tintColor {
-        case UIColor.red:
-            descriptionLabel.textColor = .systemPink
-        case UIColor.white:
-            descriptionLabel.textColor = .white
-        default:
-            break
-        }
     }
     
     @objc private func didTapFavoriteButton() {
         viewModel.favoriteButtonPressed()
     }
 }
+
+//MARK: -Extensions
+
+extension EpisodeCharacterDetailVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCharacterDetail", for: indexPath)
+        let labels = [characterNameLabel, characterStatusLabel, characterSpeciesLabel, characterGenderLabel]
+        cell.textLabel?.text = labels[indexPath.row].text
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
+        cell.textLabel?.textColor = UIColor.titleColor()
+        cell.backgroundColor = UIColor.backgroundColor()
+        return cell
+    }
+}
+
+
