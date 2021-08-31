@@ -14,19 +14,18 @@ final class EpisodeCharacterDetailVC: UIViewController {
             setupFavoriteButton()
         }
     }
-    private let tableView: UITableView = {
-        let table = UITableView()
-        table.backgroundColor = UIColor.backgroundColor()
-        table.register(UITableViewCell.self,
-                       forCellReuseIdentifier: "EpisodeCharacterDetail")
-        return table
-    }()
-    
-    private let characterNameLabel = UILabel(alignment: .left)
-    private let characterStatusLabel = UILabel(alignment: .left)
-    private let characterSpeciesLabel = UILabel(alignment: .left)
-    private let characterGenderLabel = UILabel(alignment: .left)
-    
+    private let characterNameLabel = UILabel(color: .systemPurple,
+                                             font: 30,
+                                             lines: 1)
+    private let characterStatusLabel = UILabel(color: .systemPurple,
+                                               font: 30,
+                                               lines: 1)
+    private let characterSpeciesLabel = UILabel(color: .systemPurple,
+                                                font: 30,
+                                                lines: 1)
+    private let characterGenderLabel = UILabel(color: .systemPurple,
+                                               font: 30,
+                                               lines: 1)
     private let characterImage = CharacterImageView(cornerRadius: 20)
     
     private let favoriteButton: UIButton = {
@@ -41,37 +40,23 @@ final class EpisodeCharacterDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
         setupView()
         buttonActions()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setupTableViewConstraints()
+        setupConstraints()
     }
     
     //MARK: - Actions
-    
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.dataSource = self
-    }
-    
-    private func setupTableViewConstraints() {
-        let cellHeight = (view.bounds.height - characterImage.bounds.height) / 7
-        tableView.rowHeight = cellHeight
-        tableView.constraint(top: characterImage.bottomAnchor,
-                             left: view.leftAnchor,
-                             right: view.rightAnchor,
-                             bottom: view.bottomAnchor,
-                             topConstant: 20)
-    }
-    
+
     private func setupView() {
         view.backgroundColor = UIColor.backgroundColor()
-        [characterImage,favoriteButton].forEach(view.addSubview(_:))
-        setupConstraints()
+        [characterImage,favoriteButton,characterNameLabel,
+        characterStatusLabel,characterSpeciesLabel,
+        characterGenderLabel].forEach(view.addSubview(_:))
+        
     }
     
     private func setupConstraints() {
@@ -89,6 +74,36 @@ final class EpisodeCharacterDetailVC: UIViewController {
                                   rightConstant: 10,
                                   widthConstant: 50,
                                   heightConstant: 50)
+        // labels
+        let heightLabel = CGFloat((view.frame.size.height - characterImage.frame.size.height) / 7)
+        characterNameLabel.constraint(top: characterImage.bottomAnchor,
+                                    left: view.leftAnchor,
+                                    right: view.rightAnchor,
+                                    topConstant: 20,
+                                    leftConstant: 20,
+                                    rightConstant: 20,
+                                    heightConstant: heightLabel)
+        
+        characterStatusLabel.constraint(top: characterNameLabel.bottomAnchor,
+                                    left: view.leftAnchor,
+                                    right: view.rightAnchor,
+                                    leftConstant: 20,
+                                    rightConstant: 20,
+                                    heightConstant: heightLabel)
+        
+        characterSpeciesLabel.constraint(top: characterStatusLabel.bottomAnchor,
+                                    left: view.leftAnchor,
+                                    right: view.rightAnchor,
+                                    leftConstant: 20,
+                                    rightConstant: 20,
+                                    heightConstant: heightLabel)
+        
+        characterGenderLabel.constraint(top: characterSpeciesLabel.bottomAnchor,
+                                    left: view.leftAnchor,
+                                    right: view.rightAnchor,
+                                    leftConstant: 20,
+                                    rightConstant: 20,
+                                    heightConstant: heightLabel)
     }
     
     private func buttonActions() {
@@ -107,35 +122,26 @@ final class EpisodeCharacterDetailVC: UIViewController {
     
     private func setStatusForFavoriteButton(with status: Bool) {
         favoriteButton.tintColor = status ? .red : .white
+        setLabelsColor()
+    }
+    private func setLabelsColor() {
+        let labels = [characterNameLabel, characterStatusLabel,
+                      characterSpeciesLabel, characterGenderLabel]
+        switch favoriteButton.tintColor {
+        case UIColor.red:
+            labels.forEach {
+                $0.textColor = .systemPink
+            }
+        case UIColor.white:
+            labels.forEach {
+                $0.textColor = .systemPurple
+            }
+        default:
+            break
+        }
     }
     
     @objc private func didTapFavoriteButton() {
         viewModel.favoriteButtonPressed()
     }
 }
-
-//MARK: -Extensions
-
-extension EpisodeCharacterDetailVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCharacterDetail", for: indexPath)
-        let labels = [characterNameLabel, characterStatusLabel, characterSpeciesLabel, characterGenderLabel]
-        let text = labels[indexPath.row].text
-        configureCell(cell: cell, text: text ?? "")
-        return cell
-    }
-    
-    private func configureCell(cell: UITableViewCell, text: String) {
-        cell.textLabel?.text = text
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
-        cell.textLabel?.adjustsFontSizeToFitWidth = true
-        cell.textLabel?.textColor = UIColor.titleColor()
-        cell.backgroundColor = UIColor.backgroundColor()
-    }
-}
-
-

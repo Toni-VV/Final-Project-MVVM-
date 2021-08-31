@@ -165,10 +165,10 @@ final class DetailCharacterVC: UIViewController {
     
     private func setStatusForFavoriteButton(with status: Bool) {
         favoriteButton.tintColor = status ? .red : .white
-        setDescriptionLabelColor()
+        setLabelsColor()
     }
     
-    private func setDescriptionLabelColor() {
+    private func setLabelsColor() {
         let labels = [characterNameLabel, characterStatusLabel,
                       characterSpeciesLabel, characterGenderLabel]
         switch favoriteButton.tintColor {
