@@ -27,7 +27,7 @@ final class EpisodeCharacterDetailVC: UIViewController {
     private let characterSpeciesLabel = UILabel(alignment: .left)
     private let characterGenderLabel = UILabel(alignment: .left)
     
-    private let characterImage = CharacterImageView()
+    private let characterImage = CharacterImageView(cornerRadius: 20)
     
     private let favoriteButton: UIButton = {
         let button = UIButton()
@@ -43,7 +43,6 @@ final class EpisodeCharacterDetailVC: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupView()
-        setupNavigationBar(name: viewModel.title)
         buttonActions()
     }
     
@@ -125,12 +124,17 @@ extension EpisodeCharacterDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCharacterDetail", for: indexPath)
         let labels = [characterNameLabel, characterStatusLabel, characterSpeciesLabel, characterGenderLabel]
-        cell.textLabel?.text = labels[indexPath.row].text
+        let text = labels[indexPath.row].text
+        configureCell(cell: cell, text: text ?? "")
+        return cell
+    }
+    
+    private func configureCell(cell: UITableViewCell, text: String) {
+        cell.textLabel?.text = text
         cell.textLabel?.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel?.textColor = UIColor.titleColor()
         cell.backgroundColor = UIColor.backgroundColor()
-        return cell
     }
 }
 

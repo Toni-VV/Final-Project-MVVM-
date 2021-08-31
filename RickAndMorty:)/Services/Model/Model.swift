@@ -23,15 +23,6 @@ struct Character: Decodable {
     let episode: [String]
     let url: String
     let created: String
-    
-    var description: String {
-            """
-        Name:   \(name)
-        Status:   \(status)
-        Species:   \(species)
-        Gender:   \(gender)
-        """
-        }
 }
 
 struct Location: Decodable {

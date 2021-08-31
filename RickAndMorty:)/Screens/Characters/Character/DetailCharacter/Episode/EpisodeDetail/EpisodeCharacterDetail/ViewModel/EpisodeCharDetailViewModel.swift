@@ -3,7 +3,6 @@ import Foundation
 
 protocol EpisodeCharacterDetailProtocol {
     var isFavorite: Box<Bool> { get }
-    var title: String { get }
     var name: String { get }
     var status: String { get }
     var species: String { get }
@@ -17,9 +16,7 @@ protocol EpisodeCharacterDetailProtocol {
 final class EpisodeCharacterDetailViewModel: EpisodeCharacterDetailProtocol {
 
     var isFavorite: Box<Bool>
-    var title: String {
-        character.name
-    }
+
     var name: String {
         character.name
     }

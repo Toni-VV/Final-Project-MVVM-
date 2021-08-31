@@ -3,7 +3,10 @@ import Foundation
 protocol DetailCharacterViewModelProtocol {
     var isFavorite: Box<Bool> { get }
     var title: String { get }
-    var description: String { get }
+    var name: String { get }
+    var status: String { get }
+    var species: String { get }
+    var gender: String { get }
     var characterImage: String { get }
     var index: Int { get set }
     var characters: [Character] { get }
@@ -22,9 +25,19 @@ final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
     var title: String {
         character.name
     }
-    var description: String {
-        character.description
+    var name: String {
+        character.name
     }
+    var status: String {
+        character.status
+    }
+    var species: String {
+        character.species
+    }
+    var gender: String {
+        character.gender
+    }
+
     var characterImage: String {
         character.image
     }
