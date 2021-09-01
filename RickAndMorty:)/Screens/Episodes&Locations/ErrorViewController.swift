@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ErrorVieController: UIViewController {
+class ErrorViewController: UIViewController {
     
     private let image = UIImageView(image: UIImage(named: "rick_morty_PNG19"))
     private let label = UILabel(text: """
@@ -18,11 +18,11 @@ class ErrorVieController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.backgroundColor()
         setupVieew()
     }
     
     private func setupVieew() {
+        view.backgroundColor = UIColor.backgroundColor()
         [image,label].forEach { view.addSubview($0) }
         image.contentMode = .scaleAspectFit
         setupConstraints()

@@ -18,9 +18,10 @@ protocol DetailCharacterViewModelProtocol {
 
 final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {
 
+   
+    var isFavorite: Box<Bool>
     var characters: [Character]
     var index: Int
-    var isFavorite: Box<Bool>
     
     var title: String {
         character.name

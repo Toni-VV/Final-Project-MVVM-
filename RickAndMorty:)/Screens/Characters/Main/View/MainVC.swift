@@ -19,12 +19,16 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.backgroundColor()
-        setupNavigationBar(name: "Choose Section",
-                           backButton: false)
+        setupNavigartionBar()
         setupTableView()
     }
     
     //MARK: - Actions
+    
+    private func setupNavigartionBar() {
+        setupNavigationBar(name: "Choose Section",
+                           backButton: false)
+    }
     
     private func setupTableView() {
         view.addSubview(tableView)
@@ -63,7 +67,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             let vc = CharacterViewController()
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            let vc = ErrorVieController()
+            let vc = ErrorViewController()
             vc.modalPresentationStyle = .formSheet
             present(vc, animated: true)
         }

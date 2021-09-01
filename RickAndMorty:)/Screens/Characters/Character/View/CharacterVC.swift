@@ -140,6 +140,7 @@ extension CharacterViewController: UICollectionViewDataSource, UICollectionViewD
         vc.viewModel = isFiltering ?
             viewModel.filteredDetailViewModel(index: indexPath) :
             viewModel.detailViewModel(index: indexPath)
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     

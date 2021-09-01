@@ -20,9 +20,7 @@ final class EpisodesViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.backgroundColor()
         setupTableView()
-        setupNavigationBar(name: "Episodes",
-                           backButton: true,
-                           backAction: #selector(didTapBackButton))
+        setupNavigationBar()
     }
     
     //MARK: - Actions
@@ -32,8 +30,13 @@ final class EpisodesViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        
         setupConstraints()
+    }
+    
+    private func setupNavigationBar() {
+        setupNavigationBar(name: "Episodes",
+                           backButton: true,
+                           backAction: #selector(didTapBackButton))
     }
 
     private func setupConstraints() {
@@ -61,8 +64,8 @@ extension EpisodesViewController: UITableViewDataSource, UITableViewDelegate {
         let urlString = viewModel.episodeUrl(index: indexPath.row)
         viewModel.fetchData(urlString: urlString) { [weak self] (episode) in
             let text = "\(indexPath.row + 1):   \(episode.name)"
-            self?.viewModel.episodes.append(episode)
             DispatchQueue.main.async {
+                self?.viewModel.episodes.append(episode)
                 self?.configureCell(cell: cell, text: text)
             }
         }

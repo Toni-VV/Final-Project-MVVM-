@@ -16,7 +16,8 @@ final class DetailCharacterVC: UIViewController {
             setupFavoriteButton()
         }
     }
-    
+    private let characterImage = CharacterImageView(cornerRadius: 20)
+    // buttons
     private let favoriteButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "suit.heart.fill")
@@ -31,6 +32,7 @@ final class DetailCharacterVC: UIViewController {
     private let previousButton = UIButton(systemName: "chevron.left.2",
                                           tintColor: UIColor.titleColor(),
                                           isSetUpImage: false)
+    // labels
     private let charactersCountLabel = UILabel(color: UIColor.titleColor(),
                                                font: 25,
                                                lines: 1,
@@ -47,20 +49,16 @@ final class DetailCharacterVC: UIViewController {
     private let characterGenderLabel = UILabel(color: .white,
                                                font: 30,
                                                lines: 1)
-    private let characterImage = CharacterImageView(cornerRadius: 20)
     
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar(name: viewModel.title,
-                           backButton: true,
-                           forwardButton: true,
-                           backAction: #selector(didTapBackButton),
-                           forwardAction: #selector(didTapEpisodesButton))
+        setupNavigationBar()
         setupView()
         buttonActions()
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupConstraints()
@@ -68,13 +66,20 @@ final class DetailCharacterVC: UIViewController {
     
     //MARK: - Actions
     
+    private func setupNavigationBar() {
+        setupNavigationBar(name: viewModel.title,
+                           backButton: true,
+                           forwardButton: true,
+                           backAction: #selector(didTapBackButton),
+                           forwardAction: #selector(didTapEpisodesButton))
+    }
+    
     private func setupView() {
         view.backgroundColor = UIColor.backgroundColor()
         [characterImage,favoriteButton,
          characterNameLabel,characterStatusLabel,
          characterSpeciesLabel,characterGenderLabel,nextButton,
          previousButton,charactersCountLabel].forEach(view.addSubview(_:))
-        
     }
     
     private func setupConstraints() {
@@ -92,6 +97,28 @@ final class DetailCharacterVC: UIViewController {
                                   rightConstant: 10,
                                   widthConstant: 50,
                                   heightConstant: 50)
+        // buttons
+        let widthButton = view.frame.size.width / 4
+        let heightButton = view.frame.size.height / 10
+        nextButton.constraint(right: view.rightAnchor,
+                              bottom: view.bottomAnchor,
+                              bottomConstant: 20,
+                              widthConstant: widthButton,
+                              heightConstant: heightButton)
+        
+        previousButton.constraint(left: view.leftAnchor,
+                                  bottom: view.bottomAnchor,
+                                  bottomConstant: 20,
+                                  widthConstant: heightButton,
+                                  heightConstant: heightButton )
+        
+        charactersCountLabel.constraint(left: previousButton.rightAnchor,
+                                        right: nextButton.leftAnchor,
+                                        bottom: view.bottomAnchor,
+                                        leftConstant: 8,
+                                        bottomConstant: 20,
+                                        rightConstant: 8,
+                                        heightConstant: heightButton)
         // labels
         let heightLabel = CGFloat((view.frame.size.height - characterImage.frame.size.height - nextButton.frame.size.height) / 7)
         characterNameLabel.constraint(top: characterImage.bottomAnchor,
@@ -101,46 +128,27 @@ final class DetailCharacterVC: UIViewController {
                                     leftConstant: 20,
                                     rightConstant: 20,
                                     heightConstant: heightLabel)
+        
         characterStatusLabel.constraint(top: characterNameLabel.bottomAnchor,
                                     left: view.leftAnchor,
                                     right: view.rightAnchor,
                                     leftConstant: 20,
                                     rightConstant: 20,
                                     heightConstant: heightLabel)
+        
         characterSpeciesLabel.constraint(top: characterStatusLabel.bottomAnchor,
                                     left: view.leftAnchor,
                                     right: view.rightAnchor,
                                     leftConstant: 20,
                                     rightConstant: 20,
                                     heightConstant: heightLabel)
+        
         characterGenderLabel.constraint(top: characterSpeciesLabel.bottomAnchor,
                                     left: view.leftAnchor,
                                     right: view.rightAnchor,
                                     leftConstant: 20,
                                     rightConstant: 20,
                                     heightConstant: heightLabel)
-        
-        
-        // buttons
-        let widthButton = view.frame.size.width / 4
-        let heightButton = view.frame.size.height / 10
-        nextButton.constraint(right: view.rightAnchor,
-                              bottom: view.bottomAnchor,
-                              bottomConstant: 20,
-                              widthConstant: widthButton,
-                              heightConstant: heightButton)
-        previousButton.constraint(left: view.leftAnchor,
-                                  bottom: view.bottomAnchor,
-                                  bottomConstant: 20,
-                                  widthConstant: heightButton,
-                                  heightConstant: heightButton )
-        charactersCountLabel.constraint(left: previousButton.rightAnchor,
-                                        right: nextButton.leftAnchor,
-                                        bottom: view.bottomAnchor,
-                                        leftConstant: 8,
-                                        bottomConstant: 20,
-                                        rightConstant: 8,
-                                        heightConstant: heightButton)
     }
     
     private func buttonActions() {
