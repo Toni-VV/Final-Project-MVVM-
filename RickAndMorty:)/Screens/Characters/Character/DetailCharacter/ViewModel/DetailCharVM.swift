@@ -2,18 +2,19 @@ import Foundation
 
 protocol DetailCharacterViewModelProtocol {
     var isFavorite: Box<Bool> { get }
+    var characters: [Character] { get }
+    var index: Int { get set }
     var title: String { get }
     var name: String { get }
     var status: String { get }
     var species: String { get }
     var gender: String { get }
     var characterImage: String { get }
-    var index: Int { get set }
-    var characters: [Character] { get }
-    func episodesViewModel(index: Int) -> EpisodeCharacterViewModelProtocol
     
     init(characters: [Character], index: Int)
+    
     func favoriteButtonPressed()
+    func episodesViewModel(index: Int) -> EpisodeCharacterViewModelProtocol
 }
 
 final class DetailCharacterViewModel: DetailCharacterViewModelProtocol {

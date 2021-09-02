@@ -60,23 +60,18 @@ extension EpisodesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",
+                                                 for: indexPath)
         let urlString = viewModel.episodeUrl(index: indexPath.row)
+        
         viewModel.fetchData(urlString: urlString) { [weak self] (episode) in
             let text = "\(indexPath.row + 1):   \(episode.name)"
             DispatchQueue.main.async {
                 self?.viewModel.episodes.append(episode)
-                self?.configureCell(cell: cell, text: text)
+                self?.configureCell(cell, text)
             }
         }
         return cell
-    }
-    
-    private func configureCell(cell: UITableViewCell, text: String) {
-        cell.textLabel?.text = text
-        cell.textLabel?.textColor = .systemPurple
-        cell.textLabel?.font = UIFont(name: "Copperplate-Bold", size: 18)
-        cell.backgroundColor = UIColor.backgroundColor()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -86,6 +81,14 @@ extension EpisodesViewController: UITableViewDataSource, UITableViewDelegate {
         vc.modalTransitionStyle = .coverVertical
         present(vc, animated: true)
     }
+    
+    private func configureCell(_ cell: UITableViewCell, _ text: String) {
+        cell.textLabel?.text = text
+        cell.textLabel?.textColor = .systemPurple
+        cell.textLabel?.font = UIFont(name: "Copperplate-Bold", size: 18)
+        cell.backgroundColor = UIColor.backgroundColor()
+    }
+    
 }
 
 

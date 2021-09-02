@@ -44,7 +44,7 @@ final class CharacterViewModel: CharacterViewModelProtocol {
                         completion()
                 }
             case .failure(let error):
-                print("Network fetch charactes error", error.localizedDescription)
+                print("Network fetch characters error", error.localizedDescription)
             }
         }
     }

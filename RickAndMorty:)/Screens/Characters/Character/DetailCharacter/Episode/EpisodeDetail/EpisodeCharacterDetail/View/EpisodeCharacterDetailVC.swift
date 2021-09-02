@@ -14,6 +14,19 @@ final class EpisodeCharacterDetailVC: UIViewController {
             setupFavoriteButton()
         }
     }
+    
+    private let characterImage = CharacterImageView(cornerRadius: 20)
+    
+    private let favoriteButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(systemName: "suit.heart.fill")
+        button.setImage(image, for: .normal)
+        button.tintColor = .white
+        button.contentMode = .scaleToFill
+        return button
+    }()
+    
+    // labels
     private let characterNameLabel = UILabel(color: .systemPurple,
                                              font: 30,
                                              lines: 1)
@@ -26,16 +39,6 @@ final class EpisodeCharacterDetailVC: UIViewController {
     private let characterGenderLabel = UILabel(color: .systemPurple,
                                                font: 30,
                                                lines: 1)
-    private let characterImage = CharacterImageView(cornerRadius: 20)
-    
-    private let favoriteButton: UIButton = {
-        let button = UIButton()
-        let image = UIImage(systemName: "suit.heart.fill")
-        button.setImage(image, for: .normal)
-        button.tintColor = .white
-        button.contentMode = .scaleToFill
-        return button
-    }()
     //MARK: - Life Cycle
     
     override func viewDidLoad() {

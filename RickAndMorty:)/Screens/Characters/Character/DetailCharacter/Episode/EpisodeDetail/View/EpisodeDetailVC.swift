@@ -134,7 +134,8 @@ extension EpisodeDetailVC: UICollectionViewDataSource, UICollectionViewDelegate 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeDetailCell.identifier, for: indexPath) as! EpisodeDetailCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeDetailCell.identifier,
+                                                      for: indexPath) as! EpisodeDetailCell
         let characterUrlString = viewModel.characterUrlStrings[indexPath.row]
         
         viewModel.fetchData(urlString: characterUrlString) { (character) in
