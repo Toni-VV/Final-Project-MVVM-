@@ -10,6 +10,7 @@ protocol EpisodeCharacterDetailProtocol {
     var characterImage: String { get }
 
     init(character: Character)
+    
     func favoriteButtonPressed()
 }
 
